@@ -151,6 +151,14 @@ button{cursor:pointer}
 .check{display:flex;gap:10px;align-items:center;font-size:.95rem;color:var(--ink-2);cursor:pointer}
 .check input{width:18px;height:18px;accent-color:var(--accent)}
 .buy-form .note{margin:0}
+.form-error{margin:0;padding:12px 14px;border:1px solid color-mix(in srgb,var(--danger) 45%,transparent);color:var(--danger);font-size:.92rem;background:color-mix(in srgb,var(--danger) 6%,var(--surface))}
+.form-error a{color:inherit;font-weight:600}
+.buy-done{display:none;text-align:center;padding:30px 10px}
+.buy-done svg{width:46px;height:46px;color:var(--accent);margin:0 auto 10px}
+.buy-done h3{font-family:var(--serif);font-weight:400;font-size:1.7rem;margin:0 0 8px}
+.buy-done p{color:var(--ink-2);margin:0 0 22px}
+.buy-form.sent > :not(.buy-done){display:none}
+.buy-form.sent .buy-done{display:block}
 .lb-buy{margin-top:26px;background:transparent;color:var(--lb-ink);border:1px solid rgba(255,255,255,.28)}
 .lb-buy:hover{background:rgba(255,255,255,.08);opacity:1}
 @media (max-width:520px){.buy-form .f-row{grid-template-columns:1fr}}
@@ -346,8 +354,16 @@ dialog::backdrop{background:rgba(10,9,8,.55);-webkit-backdrop-filter:blur(3px);b
         <label class="f"><span data-i18n="fWork">היצירה שמעניינת אתכם</span><select name="work" id="buyWork"></select></label>
         <label class="check"><input type="checkbox" name="frame"> <span data-i18n="fFrame">מעוניין/ת גם במסגרת עץ בעבודת יד</span></label>
         <label class="f"><span data-i18n="fMsg">הודעה</span><textarea name="message" rows="4" placeholder="שאלות, מידות מבוקשות, איסוף או משלוח…" data-i18n-attr="placeholder:fMsgPh"></textarea></label>
-        <div><button class="btn" type="submit" data-i18n="fSend">שליחת פנייה במייל</button></div>
+        <div><button class="btn" type="submit" data-i18n="fSend">שליחת פנייה</button></div>
+        <p class="form-error" id="buyError" role="alert" hidden></p>
         <p class="note" id="buyNote"></p>
+        <input type="text" name="_honey" class="sr-only" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="buy-done" id="buyDone" role="status">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m7.5 12.5 3 3 6-6.5"/></svg>
+          <h3 data-i18n="doneTitle">הפנייה נשלחה</h3>
+          <p data-i18n="doneText">תודה! הפנייה הגיעה לעופר, והוא יחזור אליכם בהקדם.</p>
+          <button type="button" class="btn ghost" id="buyAgain" data-i18n="sendAnother">שליחת פנייה נוספת</button>
+        </div>
       </form>
     </div>
   </section>
@@ -507,13 +523,15 @@ const I18N = {
     buyP2: 'ממלאים את הפרטים, והפנייה נשלחת במייל ישירות לעופר. הוא יחזור אליכם עם כל הפרטים.',
     frameTitle: 'מסגרת עץ בעבודת יד', frameText: 'לכל ציור אפשר להוסיף מסגרת עץ שעופר מכין בעצמו, בעבודת יד.',
     fName: 'שם מלא *', fPhone: 'טלפון', fEmail: 'אימייל', fWork: 'היצירה שמעניינת אתכם',
-    fFrame: 'מעוניין/ת גם במסגרת עץ בעבודת יד', fMsg: 'הודעה', fMsgPh: 'שאלות, מידות מבוקשות, איסוף או משלוח…', fSend: 'שליחת פנייה במייל',
+    fFrame: 'מעוניין/ת גם במסגרת עץ בעבודת יד', fMsg: 'הודעה', fMsgPh: 'שאלות, מידות מבוקשות, איסוף או משלוח…', fSend: 'שליחת פנייה',
     chooseWork: 'בחרו יצירה…', custom: 'ציור בהזמנה אישית', undecided: 'עדיין לא החלטתי', no: 'מס׳',
-    buyNote: a => `הלחיצה פותחת את תוכנת המייל עם הפנייה מוכנה לשליחה. אפשר גם לכתוב ישירות ל־${a}`,
+    buyNote: a => `הפנייה נשלחת ישירות למייל של עופר. אפשר גם לכתוב לו ל־${a}`,
     needName: 'נא למלא שם',
-    mail: { hello: 'שלום עופר,', name: 'שם', phone: 'טלפון', email: 'אימייל', work: 'יצירה', image: 'תמונה',
-            frame: 'מסגרת עץ בעבודת יד', frameYes: 'כן, מעוניין/ת', unspecified: 'לא צוין',
-            subjCustom: 'פנייה לגבי ציור בהזמנה אישית', subjWork: l => `התעניינות ברכישה — ${l}`, subjGeneral: 'התעניינות ברכישת ציור' }
+    needContact: 'נא להשאיר טלפון או אימייל, כדי שעופר יוכל לחזור אליכם',
+    badEmail: 'כתובת האימייל לא תקינה',
+    sending: 'שולח…',
+    sendFail: 'משהו השתבש והפנייה לא נשלחה. אפשר לנסות שוב בעוד רגע, או לכתוב ישירות ל־',
+    doneTitle: 'הפנייה נשלחה', doneText: 'תודה! הפנייה הגיעה לעופר, והוא יחזור אליכם בהקדם.', sendAnother: 'שליחת פנייה נוספת'
   },
   en: {
     dir: 'ltr', switchTo: 'עב', switchLabel: 'עברית',
@@ -530,13 +548,15 @@ const I18N = {
     buyP2: 'Fill in your details and the inquiry is sent by email directly to Ofer, who will get back to you with all the details.',
     frameTitle: 'Handmade wooden frame', frameText: 'Any painting can be fitted with a wooden frame that Ofer makes himself, by hand.',
     fName: 'Full name *', fPhone: 'Phone', fEmail: 'Email', fWork: 'The work you are interested in',
-    fFrame: 'I am also interested in a handmade wooden frame', fMsg: 'Message', fMsgPh: 'Questions, preferred size, pickup or shipping…', fSend: 'Send inquiry by email',
+    fFrame: 'I am also interested in a handmade wooden frame', fMsg: 'Message', fMsgPh: 'Questions, preferred size, pickup or shipping…', fSend: 'Send inquiry',
     chooseWork: 'Choose a work…', custom: 'Commissioned painting', undecided: 'Not decided yet', no: 'No.',
-    buyNote: a => `Clicking opens your email app with the inquiry ready to send. You can also write directly to ${a}`,
+    buyNote: a => `Your inquiry goes straight to Ofer's email. You can also write to him at ${a}`,
     needName: 'Please enter your name',
-    mail: { hello: 'Hello Ofer,', name: 'Name', phone: 'Phone', email: 'Email', work: 'Artwork', image: 'Image',
-            frame: 'Handmade wooden frame', frameYes: 'Yes, interested', unspecified: 'Not specified',
-            subjCustom: 'Inquiry about a commissioned painting', subjWork: l => `Purchase inquiry — ${l}`, subjGeneral: 'Inquiry about purchasing a painting' }
+    needContact: 'Please leave a phone number or an email address so Ofer can get back to you',
+    badEmail: 'The email address is not valid',
+    sending: 'Sending…',
+    sendFail: 'Something went wrong and the inquiry was not sent. Please try again in a moment, or write directly to ',
+    doneTitle: 'Inquiry sent', doneText: 'Thank you! Your inquiry has reached Ofer, and he will get back to you soon.', sendAnother: 'Send another inquiry'
   }
 };
 const CONTENT_EN = {
@@ -849,25 +869,46 @@ function renderBuy(){
     list.map(w => `<option value="${esc(w.id)}">${w.n ? `${T.no} ${w.n} — ` : ''}${esc(titleOf(w))}</option>`).join('') +
     `<option value="custom">${T.custom}</option><option value="undecided">${T.undecided}</option>`;
   sel.value = keep;
+  $('#buyError').innerHTML = `${T.sendFail}<a href="mailto:${esc(CONTACT_EMAIL)}" dir="ltr">${esc(CONTACT_EMAIL)}</a>`;
   $('#buyNote').innerHTML = T.buyNote(`<a href="mailto:${esc(CONTACT_EMAIL)}" dir="ltr">${esc(CONTACT_EMAIL)}</a>`);
 }
-function sendInquiry(form){
-  const v = n => form.elements[n].value.trim();
-  const M = L().mail;
-  if (!v('name')){ toast(L().needName); form.elements.name.focus(); return; }
-  const sel = form.elements.work, opt = sel.options[sel.selectedIndex];
-  const workLabel = sel.value ? opt.textContent : M.unspecified;
-  const w = works.find(x => x.id === sel.value);
-  const subject = sel.value === 'custom' ? M.subjCustom : w ? M.subjWork(workLabel) : M.subjGeneral;
-  const lines = [M.hello, '', `${M.name}: ${v('name')}`];
-  if (v('phone')) lines.push(`${M.phone}: ${v('phone')}`);
-  if (v('email')) lines.push(`${M.email}: ${v('email')}`);
-  lines.push(`${M.work}: ${workLabel}`);
-  if (w) lines.push(`${M.image}: ${new URL(w.src, location.href).href}`);
-  lines.push(`${M.frame}: ${form.elements.frame.checked ? M.frameYes : M.unspecified}`);
-  if (v('message')) lines.push('', v('message'));
-  const body = lines.join('\n');
-  location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+async function sendInquiry(form){
+  const T = L(), v = n => form.elements[n].value.trim();
+  if (v('_honey')) return;                                    // filled only by spam bots
+  if (!v('name')){ toast(T.needName); form.elements.name.focus(); return; }
+  if (!v('phone') && !v('email')){ toast(T.needContact); form.elements.phone.focus(); return; }
+  if (v('email') && !form.elements.email.checkValidity()){ toast(T.badEmail); form.elements.email.focus(); return; }
+  const sel = form.elements.work, w = works.find(x => x.id === sel.value);
+  // The e-mail Ofer receives is always in Hebrew, whatever language the visitor used
+  const workHe = !sel.value ? 'לא צוין' : sel.value === 'custom' ? 'ציור בהזמנה אישית'
+               : sel.value === 'undecided' ? 'עדיין לא החליט/ה' : w ? `${w.n ? `מס׳ ${w.n} — ` : ''}${w.title}` : 'לא צוין';
+  const data = {
+    _subject: sel.value === 'custom' ? 'פנייה חדשה מהאתר — ציור בהזמנה אישית' : `פנייה חדשה מהאתר — ${w ? workHe : 'התעניינות ברכישה'}`,
+    _template: 'table', _captcha: 'false',
+    'שם': v('name'), 'טלפון': v('phone') || '—', 'אימייל': v('email') || '—',
+    'יצירה': workHe,
+    'מסגרת עץ בעבודת יד': form.elements.frame.checked ? 'כן, מעוניין/ת' : 'לא צוין',
+    'הודעה': v('message') || '—',
+    'שפת האתר': isEn() ? 'אנגלית' : 'עברית'
+  };
+  if (w) data['קישור לתמונה'] = new URL(w.src, location.href).href;
+  if (v('email')) data._replyto = v('email');
+  const btn = form.querySelector('[type=submit]');
+  btn.disabled = true; btn.textContent = T.sending; $('#buyError').hidden = true;
+  try {
+    const res = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data)
+    });
+    const out = await res.json().catch(() => ({}));
+    if (!res.ok || String(out.success) !== 'true') throw new Error(out.message || `HTTP ${res.status}`);
+    form.reset(); form.classList.add('sent');
+    form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  } catch (err) {
+    console.warn('Inquiry not sent:', err.message);
+    $('#buyError').hidden = false;
+  } finally {
+    btn.disabled = false; btn.textContent = T.fSend;
+  }
 }
 
 function renderTechList(){
@@ -1151,6 +1192,7 @@ function bindEvents(){
     setTimeout(() => go('buy'), 350);                // after the viewer's history step settles
   });
   $('#buyForm').addEventListener('submit', e => { e.preventDefault(); sendInquiry(e.target); });
+  $('#buyAgain').addEventListener('click', () => { $('#buyForm').classList.remove('sent'); $('#buyForm').elements.name.focus(); });
   $('#lbPrev').addEventListener('click', () => LB.step(-1));
   $('#lbNext').addEventListener('click', () => LB.step(1));
   $('#lbStage').addEventListener('click', e => { if (e.target.id === 'lbStage') LB.close(); });
