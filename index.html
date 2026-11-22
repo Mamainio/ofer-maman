@@ -12,7 +12,7 @@
 <meta property="og:description" content="ציורי שמן ריאליסטיים">
 <meta property="og:locale" content="he_IL">
 <meta property="og:url" content="https://ofermaman.com/">
-<meta property="og:image" content="https://ofermaman.com/works/thumbs/36-lion-lioness.jpg">
+<meta property="og:image" content="https://ofermaman.com/works/thumbs/02-vineyard-hills.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%231c1a17'/%3E%3Ctext x='32' y='44' font-family='serif' font-size='34' fill='%23c8a96a' text-anchor='middle'%3Eע%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -138,16 +138,6 @@ button{cursor:pointer}
 .fact a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--accent)}
 
 .buy{border-top:1px solid var(--line);padding:clamp(64px,9vw,128px) 0}
-/* Framed / on the wall */
-.framed{border-top:1px solid var(--line);margin-top:clamp(40px,6vw,80px);padding:clamp(64px,9vw,128px) 0 0;text-align:center}
-.framed h2{font-family:var(--serif);font-weight:300;font-size:clamp(2.1rem,4.2vw,3.2rem);line-height:1.1;margin:.3em 0 1.1em}
-.fr-grid{columns:4 220px;column-gap:clamp(16px,2.4vw,32px)}
-.fr-item{margin:0 0 clamp(16px,2.4vw,32px);break-inside:avoid;cursor:zoom-in;box-shadow:var(--shadow);overflow:hidden;outline:none}
-.fr-item img{display:block;width:100%;height:auto;transition:transform 1s cubic-bezier(.2,.7,.2,1)}
-.fr-item:hover img,.fr-item:focus-visible img{transform:scale(1.03)}
-.fr-item:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
-.framed + .about{margin-top:clamp(24px,4vw,56px)}
-@media (max-width:560px){.fr-grid{columns:2;column-gap:12px}.fr-item{margin-bottom:12px}}
 .buy-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(36px,7vw,110px);align-items:start}
 @media (max-width:820px){.buy-grid{grid-template-columns:1fr}}
 .buy h2{font-family:var(--serif);font-weight:300;font-size:clamp(2.1rem,4.2vw,3.2rem);line-height:1.1;margin:.3em 0 .7em}
@@ -171,6 +161,14 @@ button{cursor:pointer}
 .buy-form.sent .buy-done{display:block}
 .lb-buy{margin-top:26px;background:transparent;color:var(--lb-ink);border:1px solid rgba(255,255,255,.28)}
 .lb-buy:hover{background:rgba(255,255,255,.08);opacity:1}
+/* Viewer: painting / framed */
+.lb-views{display:flex;gap:12px;margin:0 0 26px}
+.lb-views button{background:none;border:0;padding:0;color:var(--lb-muted);font-size:.74rem;letter-spacing:.08em;display:flex;flex-direction:column;gap:6px;align-items:center;cursor:pointer}
+.lb-views img{width:64px;height:64px;object-fit:cover;display:block;border:1px solid var(--lb-line);opacity:.55;transition:opacity .2s,border-color .2s}
+.lb-views button:hover img{opacity:.85}
+.lb-views button[aria-pressed="true"]{color:var(--lb-ink)}
+.lb-views button[aria-pressed="true"] img{opacity:1;border-color:rgba(255,255,255,.6)}
+@media (max-width:900px){.lb-views{margin-bottom:18px}.lb-views img{width:52px;height:52px}}
 @media (max-width:520px){.buy-form .f-row{grid-template-columns:1fr}}
 .site-footer{border-top:1px solid var(--line);padding:28px 0 calc(28px + env(safe-area-inset-bottom));font-size:.84rem;color:var(--muted)}
 .site-footer .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
@@ -324,23 +322,6 @@ dialog::backdrop{background:rgba(10,9,8,.55);-webkit-backdrop-filter:blur(3px);b
   <section id="works" class="wrap" aria-label="יצירות" data-i18n-attr="aria-label:worksLabel">
     <div class="filters" id="filters" role="toolbar" aria-label="סינון לפי טכניקה" data-i18n-attr="aria-label:filtersLabel"></div>
     <div class="grid" id="grid"><div class="loading" data-i18n="loading">מכין את הגלריה…</div></div>
-  </section>
-
-  <section id="framed" class="framed">
-    <div class="wrap">
-      <p class="eyebrow" data-i18n="framedEyebrow">במסגרת ועל הקיר</p>
-      <h2 data-i18n="framedTitle">כך הן נראות בבית</h2>
-      <div class="fr-grid" id="frGrid">
-      <figure class="fr-item" data-n="36" tabindex="0" role="button"><img src="works/framed/lion-wall.jpg" width="675" height="900" loading="lazy" decoding="async" alt=""></figure>
-      <figure class="fr-item" data-n="12" tabindex="0" role="button"><img src="works/framed/field-room.jpg" width="900" height="678" loading="lazy" decoding="async" alt=""></figure>
-      <figure class="fr-item" data-n="12" tabindex="0" role="button"><img src="works/framed/field-gallery.jpg" width="894" height="900" loading="lazy" decoding="async" alt=""></figure>
-      <figure class="fr-item" data-n="45" tabindex="0" role="button"><img src="works/framed/sails-gallery.jpg" width="572" height="900" loading="lazy" decoding="async" alt=""></figure>
-      <figure class="fr-item" data-n="37" tabindex="0" role="button"><img src="works/framed/bull-gold.jpg" width="900" height="749" loading="lazy" decoding="async" alt=""></figure>
-      <figure class="fr-item" data-n="38" tabindex="0" role="button"><img src="works/framed/umbrella-frame.jpg" width="764" height="900" loading="lazy" decoding="async" alt=""></figure>
-      <figure class="fr-item" data-n="42" tabindex="0" role="button"><img src="works/framed/horse-frame.jpg" width="900" height="693" loading="lazy" decoding="async" alt=""></figure>
-      <figure class="fr-item" data-n="7" tabindex="0" role="button"><img src="works/framed/bench-gold.jpg" width="811" height="900" loading="lazy" decoding="async" alt=""></figure>
-      </div>
-    </div>
   </section>
 
   <section id="about" class="about">
@@ -541,7 +522,7 @@ const I18N = {
     themeLight: 'מצב בהיר', themeDark: 'מצב כהה',
     heroEyebrow: 'גלריה · אוסף עבודות', worksLabel: 'יצירות', filtersLabel: 'סינון לפי טכניקה', loading: 'מכין את הגלריה…',
     allWorks: 'כל העבודות', openFull: 'פתיחה בתצוגה מלאה',
-    framedEyebrow: 'במסגרת ועל הקיר', framedTitle: 'כך הן נראות בבית', framedOpen: 'לצפייה ביצירה',
+    viewPainting: 'הציור', viewFramed: 'במסגרת',
     aboutEyebrow: 'אודות האמן', factWorks: 'יצירות בגלריה', factYears: 'שנות יצירה', factStudio: 'סטודיו', factContact: 'יצירת קשר',
     rights: 'כל הזכויות שמורות',
     lbLabel: 'צפייה ביצירה', lbPrev: 'היצירה הקודמת', lbNext: 'היצירה הבאה', close: 'סגירה',
@@ -567,7 +548,7 @@ const I18N = {
     themeLight: 'Light mode', themeDark: 'Dark mode',
     heroEyebrow: 'Gallery · Selected works', worksLabel: 'Works', filtersLabel: 'Filter by technique', loading: 'Preparing the gallery…',
     allWorks: 'All works', openFull: 'open full view',
-    framedEyebrow: 'Framed & on the wall', framedTitle: 'How they look at home', framedOpen: 'View the work',
+    viewPainting: 'Painting', viewFramed: 'Framed',
     aboutEyebrow: 'About the artist', factWorks: 'works in the gallery', factYears: 'years', factStudio: 'studio', factContact: 'contact',
     rights: 'All rights reserved',
     lbLabel: 'Artwork view', lbPrev: 'Previous work', lbNext: 'Next work', close: 'Close',
@@ -749,25 +730,25 @@ async function processSource(dataUrl){
    The collection — photos live in works/ (full size) and works/thumbs/
    To add/rename built-in works: edit this list and bump COLLECTION_VERSION.
    ========================================================= */
-const COLLECTION_VERSION = 5;
+const COLLECTION_VERSION = 7;
 const DEFAULT_TECHNIQUE = 'שמן על קנבס';
 // Purchase inquiries are sent by e-mail to this address. Empty = the purchase section stays hidden.
 const CONTACT_EMAIL = 'ofmaman@gmail.com';
 const COLLECTION = [
-  // Order here = order on the site (n stays the catalogue number). The lion opens the gallery.
-  { n:36, file:'36-lion-lioness.jpg', title:'אריה ולביאה', en:'Lion and Lioness', w:864, h:1200 },
+  // Order here = order on the site (n stays the catalogue number). The vineyard opens the gallery.
   { n: 2, file:'02-vineyard-hills.jpg', title:'כרם ובית בגבעות', en:'Vineyard and House in the Hills', w:1345, h:1809 },
+  { n:36, file:'36-lion-lioness.jpg', title:'אריה ולביאה', en:'Lion and Lioness', w:968, h:1344, framed:['lion-wall.jpg'] },
   { n: 3, file:'03-three-sheep.jpg', title:'שלוש כבשים', en:'Three Sheep', w:786, h:977 },
   { n: 4, file:'04-dancer.jpg', title:'רקדנית', en:'Dancer', w:921, h:1322 },
   { n: 5, file:'05-clementine.jpg', title:'קלמנטינה קלופה', en:'Peeled Clementine', w:985, h:1430 },
   { n: 6, file:'06-poppies.jpg', title:'פרגים ופרחי בר', en:'Poppies and Wildflowers', w:1890, h:2400 },
   { n: 1, file:'01-green-headscarf.jpg', title:'אישה במטפחת ירוקה', en:'Woman in a Green Headscarf', w:1253, h:1853 },
-  { n: 7, file:'07-bench.jpg', title:'סבא ונכדה על הספסל', en:'Grandfather and Granddaughter on a Bench', w:1288, h:1726 },
+  { n: 7, file:'07-bench.jpg', title:'סבא ונכדה על הספסל', en:'Grandfather and Granddaughter on a Bench', w:1288, h:1726, framed:['bench-gold.jpg'] },
   { n: 8, file:'08-path-to-sea.jpg', title:'שביל אל הים', en:'Path to the Sea', w:730, h:1063 },
   { n: 9, file:'09-coffee-croissant.jpg', title:'קפה וקרואסון', en:'Coffee and Croissant', w:762, h:1118 },
   { n:10, file:'10-window.jpg', title:'אישה ליד החלון', en:'Woman by the Window', w:1719, h:2400 },
   { n:11, file:'11-red-roses.jpg', title:'ורדים אדומים', en:'Red Roses', w:1120, h:1663 },
-  { n:12, file:'12-field-two-trees.jpg', title:'שדה ושני עצים', en:'Field with Two Trees', w:1937, h:2024 },
+  { n:12, file:'12-field-two-trees.jpg', title:'שדה ושני עצים', en:'Field with Two Trees', w:1937, h:2024, framed:['field-room.jpg', 'field-gallery.jpg'] },
   { n:13, file:'13-ewe-and-lamb.jpg', title:'כבשה וטלה', en:'Ewe and Lamb', w:894, h:1145 },
   { n:14, file:'14-lemon-glass.jpg', title:'כוס מים ולימון', en:'Glass of Water with Lemon', w:1751, h:2400 },
   { n:15, file:'15-flower-basket.jpg', title:'סל הפרחים', en:'The Flower Basket', w:1261, h:1582 },
@@ -791,18 +772,18 @@ const COLLECTION = [
   { n:33, file:'33-dry-stream.jpg', title:'ערוץ נחל', en:'Streambed', w:1013, h:1456 },
   { n:34, file:'34-sweeping-woman.jpg', title:'אישה מטאטאת באור', en:'Woman Sweeping in the Light', w:1138, h:1677 },
   { n:35, file:'35-waves-beach.jpg', title:'גלים על החוף', en:'Waves on the Shore', w:988, h:1471 },
-  { n:37, file:'37-bull.jpg', title:'שור', en:'The Bull', w:1200, h:964 },
-  { n:38, file:'38-umbrella-dog.jpg', title:'האיש עם המטרייה והכלב', en:'Man with an Umbrella and a Dog', w:965, h:1200 },
-  { n:39, file:'39-woman-oven.jpg', title:'אישה מול התנור', en:'Woman at the Oven', w:1200, h:949 },
-  { n:40, file:'40-winter-path.jpg', title:'שביל ועצים בחורף', en:'Path and Trees in Winter', w:856, h:1200 },
-  { n:41, file:'41-looking-up.jpg', title:'מבט אל על', en:'Looking Up', w:787, h:1200 },
-  { n:42, file:'42-black-horse.jpg', title:'סוס שחור', en:'Black Horse', w:1200, h:884 },
-  { n:43, file:'43-bottle-sand.jpg', title:'בקבוק בחול', en:'Bottle in the Sand', w:1200, h:830 },
-  { n:44, file:'44-two-figures.jpg', title:'שתי דמויות לבנות', en:'Two White Figures', w:486, h:1200 },
-  { n:45, file:'45-blue-sails.jpg', title:'קומפוזיציה כחולה עם מפרשים', en:'Blue Composition with Sails', w:1200, h:1165 },
-  { n:46, file:'46-hat-portrait.jpg', title:'דיוקן בכובע', en:'Portrait in a Hat', w:691, h:1200 },
-  { n:47, file:'47-baby-hands.jpg', title:'תינוק בכפות ידיים', en:'Baby in Cupped Hands', w:1200, h:819 },
-  { n:48, file:'48-draped-sketch.jpg', title:'אישה עטופה — רישום', en:'Draped Woman — Sketch', w:892, h:1200, technique:'רישום בעיפרון' }
+  { n:37, file:'37-bull.jpg', title:'שור', en:'The Bull', w:1344, h:1080, framed:['bull-gold.jpg'] },
+  { n:38, file:'38-umbrella-dog.jpg', title:'האיש עם המטרייה והכלב', en:'Man with an Umbrella and a Dog', w:968, h:1204, framed:['umbrella-frame.jpg'] },
+  { n:39, file:'39-woman-oven.jpg', title:'אישה מול התנור', en:'Woman at the Oven', w:956, h:756 },
+  { n:40, file:'40-winter-path.jpg', title:'שביל ועצים בחורף', en:'Path and Trees in Winter', w:708, h:992 },
+  { n:41, file:'41-looking-up.jpg', title:'מבט אל על', en:'Looking Up', w:656, h:1000 },
+  { n:42, file:'42-black-horse.jpg', title:'סוס שחור', en:'Black Horse', w:1336, h:984, framed:['horse-frame.jpg'] },
+  { n:43, file:'43-bottle-sand.jpg', title:'בקבוק בחול', en:'Bottle in the Sand', w:960, h:664 },
+  { n:44, file:'44-two-figures.jpg', title:'שתי דמויות לבנות', en:'Two White Figures', w:428, h:1056 },
+  { n:45, file:'45-blue-sails.jpg', title:'קומפוזיציה כחולה עם מפרשים', en:'Blue Composition with Sails', w:828, h:804, framed:['sails-gallery.jpg'] },
+  { n:46, file:'46-hat-portrait.jpg', title:'דיוקן בכובע', en:'Portrait in a Hat', w:806, h:1400 },
+  { n:47, file:'47-baby-hands.jpg', title:'תינוק בכפות ידיים', en:'Baby in Cupped Hands', w:1400, h:956 },
+  { n:48, file:'48-draped-sketch.jpg', title:'אישה עטופה — רישום', en:'Draped Woman — Sketch', w:1040, h:1400, technique:'רישום בעיפרון' }
 ];
 
 async function seedCollection(){
@@ -814,6 +795,7 @@ async function seedCollection(){
     id: 'work-' + String(c.n).padStart(2, '0'), n: c.n, title: c.title,
     year: c.year || '', technique: c.technique || DEFAULT_TECHNIQUE, dimensions: c.dimensions || '', description: c.description || '',
     src: 'works/' + c.file, thumb: 'works/thumbs/' + c.file, w: c.w, h: c.h,
+    framed: (c.framed || []).map(f => 'works/framed/' + f),
     order: COLLECTION.length - idx, builtin: true, createdAt: Date.now()
   }));
   await DB.putMany('works', items);
@@ -833,10 +815,6 @@ function renderAll(){
   $('#heroTagline').textContent = siteText('tagline');
   $('#footerText').textContent = `© ${new Date().getFullYear()} ${name} · ${L().rights}`;
   renderFilters(); renderGrid(); renderAbout(); renderTechList(); renderBuy();
-  $$('.fr-item').forEach(f => {                    // framed pictures: localized names for screen readers
-    const w = works.find(x => x.n === +f.dataset.n); if (!w) return;
-    f.setAttribute('aria-label', `${titleOf(w)} — ${L().framedOpen}`); f.querySelector('img').alt = titleOf(w);
-  });
   if (!$('#viewAdmin').hidden){ renderAdminList(); }
   $('#worksCount').textContent = works.length ? `(${works.length})` : '';
 }
@@ -991,12 +969,14 @@ const LB = {
     img.style.opacity = 0;
     img.onload = () => { img.style.opacity = 1; };
     img.src = w.src; img.alt = titleOf(w);
+    const views = [w.src, ...(w.framed || [])];
     if (img.complete) img.style.opacity = 1;
     const T = L(), rows = [[T.year, w.year], [T.technique, techOf(w)], [T.size, w.dimensions]].filter(r => r[1]);
     $('#lbInfo').innerHTML = `
       <p class="eyebrow"><span dir="ltr">${String(this.i + 1).padStart(2, '0')} / ${String(this.list.length).padStart(2, '0')}</span></p>
       <h2>${esc(titleOf(w))}</h2>
       ${rows.length ? `<dl>${rows.map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join('')}</dl>` : ''}
+      ${views.length > 1 ? `<div class="lb-views">${views.map((src, v) => `<button type="button" data-view="${esc(src)}" aria-pressed="${v === 0}"><img src="${esc(v ? src : (w.thumb || src))}" alt="">${v ? T.viewFramed : T.viewPainting}</button>`).join('')}</div>` : ''}
       ${w.description ? `<p class="desc">${esc(w.description)}</p>` : ''}
       ${CONTACT_EMAIL ? `<button class="btn lb-buy" data-buy="${esc(w.id)}">${T.buyBtn}</button>` : ''}`;
     $('#lbInfo').scrollTop = 0;
@@ -1229,16 +1209,17 @@ function bindEvents(){
   $('#grid').addEventListener('click', e => { const w = e.target.closest('.work'); if (w) openFrom(w); });
   $('#grid').addEventListener('keydown', e => { const w = e.target.closest('.work'); if (w && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); openFrom(w); } });
 
-  // Framed pictures open the matching work in the viewer
-  const openFramed = el => { const list = sorted(), i = list.findIndex(w => w.n === +el.dataset.n); if (i >= 0) LB.open(list, i); };
-  $('#frGrid').addEventListener('click', e => { const f = e.target.closest('.fr-item'); if (f) openFramed(f); });
-  $('#frGrid').addEventListener('keydown', e => { const f = e.target.closest('.fr-item'); if (f && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); openFramed(f); } });
-
   // Lightbox (RTL: "next" sits on the left)
   $('#lbClose').innerHTML = ICON.close;
   $('#langBtn').addEventListener('click', () => setLang(isEn() ? 'he' : 'en'));
   $('#lbClose').addEventListener('click', () => LB.close());
   $('#lbInfo').addEventListener('click', e => {
+    const v = e.target.closest('[data-view]');
+    if (v){                                         // painting / framed
+      $$('[data-view]', $('#lbInfo')).forEach(b => b.setAttribute('aria-pressed', b === v));
+      LB.img.style.opacity = 0; LB.img.src = v.dataset.view; if (LB.img.complete) LB.img.style.opacity = 1;
+      return;
+    }
     const b = e.target.closest('[data-buy]'); if (!b) return;
     LB.close(); $('#buyWork').value = b.dataset.buy;
     setTimeout(() => go('buy'), 350);                // after the viewer's history step settles
