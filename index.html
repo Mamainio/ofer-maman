@@ -256,9 +256,28 @@ button{cursor:pointer}
 /* =========================================================
    4. Hero
    ========================================================= */
-.hero{padding:clamp(64px,12vw,150px) 0 clamp(40px,6vw,76px);text-align:center}
-.hero h1{font-family:var(--serif);font-weight:300;font-size:clamp(2.6rem,7.4vw,5.6rem);line-height:1.04;margin:.32em 0 .3em;letter-spacing:-.01em}
-.hero p{color:var(--ink-2);font-size:clamp(1rem,1.6vw,1.16rem);max-width:34em;margin:0 auto;font-weight:300}
+.hero{position:relative;height:min(82vh,720px);min-height:480px;overflow:hidden;display:grid;place-items:center;text-align:center}
+/* all the paintings, faded behind the name */
+.hero-tiles{position:absolute;top:-24px;left:-16%;right:-16%;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-content:flex-start}
+.hero-tiles img{height:clamp(104px,13.5vw,190px);width:auto;opacity:0;transition:opacity 1.2s ease}
+.hero-tiles img.in{opacity:1}
+.hero::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 62% 58% at 50% 50%,color-mix(in srgb,var(--bg) 95%,transparent) 0,color-mix(in srgb,var(--bg) 86%,transparent) 45%,color-mix(in srgb,var(--bg) 58%,transparent) 100%),
+             linear-gradient(to bottom,transparent 82%,var(--bg) 100%)}
+.hero-text{position:relative;z-index:2}
+.hero-sub{color:var(--ink-2);font-size:clamp(1rem,1.6vw,1.16rem);margin:0;font-weight:300}
+.hero-cta{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+.hero-cta .btn.ghost{background:color-mix(in srgb,var(--bg) 70%,transparent)}
+#works{border-top:1px solid var(--line);padding-top:clamp(48px,7vw,88px)}
+/* WhatsApp */
+.wa-ico{width:17px;height:17px;flex-shrink:0;color:#25a35a}
+.lb-acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}.lb-acts .lb-buy{margin-top:0}
+.lb-wa{background:transparent;color:var(--lb-ink);border:1px solid rgba(255,255,255,.28)}.lb-wa:hover{background:rgba(255,255,255,.08);opacity:1}
+.lb-page{display:inline-block;margin-top:18px;color:var(--lb-muted);font-size:.86rem;text-underline-offset:3px}.lb-page:hover{color:var(--lb-ink)}
+.wa-line{display:inline-flex;align-items:center;gap:8px;margin-top:18px;color:var(--ink-2);font-size:.95rem;text-decoration:none}
+.wa-line u{text-underline-offset:3px;text-decoration-color:var(--accent)}.wa-line:hover{color:var(--ink)}
+@media (max-width:559px){.work .m .sz{display:none}}
+.hero h1{font-family:var(--serif);font-weight:400;font-size:clamp(3.4rem,10vw,8rem);line-height:1;margin:.22em 0 .2em;letter-spacing:-.01em}
 .rule{width:48px;height:1px;background:var(--accent);margin:34px auto 0}
 
 /* =========================================================
@@ -484,12 +503,19 @@ dialog::backdrop{background:rgba(10,9,8,.55);-webkit-backdrop-filter:blur(3px);b
 
 <!-- ===================== PUBLIC VIEW ===================== -->
 <main id="viewMain">
-  <section class="hero wrap">
-    <p class="eyebrow" id="heroEyebrow" data-i18n="heroEyebrow">גלריה · אוסף עבודות</p>
-    <h1 id="heroName">עופר ממן</h1>
-    <p id="heroTagline"></p>
-    <div class="rule"></div>
+  <section class="hero">
+    <div class="hero-tiles" id="heroTiles" aria-hidden="true"></div>
+    <div class="hero-text wrap">
+      <p class="eyebrow" id="heroEyebrow" data-i18n="heroEyebrow">גלריה · אוסף עבודות</p>
+      <h1 id="heroName">עופר ממן</h1>
+      <p class="hero-sub"><span id="heroTagline"></span><span id="heroCount"></span></p>
+      <div class="hero-cta">
+        <button class="btn" data-go="works" data-i18n="heroToGallery">לגלריה</button>
+        <button class="btn ghost" data-go="buy" data-pick="custom" data-needs-email hidden data-i18n="heroCommission">להזמנת ציור</button>
+      </div>
+    </div>
   </section>
+
 
   <section id="works" class="wrap" aria-label="יצירות" data-i18n-attr="aria-label:worksLabel">
     <div class="filters" id="filters" role="toolbar" aria-label="סינון לפי טכניקה" data-i18n-attr="aria-label:filtersLabel"></div>
@@ -524,6 +550,7 @@ dialog::backdrop{background:rgba(10,9,8,.55);-webkit-backdrop-filter:blur(3px);b
             <span data-i18n="frameText">לכל ציור אפשר להוסיף מסגרת עץ שעופר מכין בעצמו, בעבודת יד.</span>
           </div>
         </div>
+        <a class="wa-line" id="buyWa" target="_blank" rel="noopener"></a>
       </div>
       <form class="buy-form" id="buyForm" novalidate>
         <div class="f-row">
@@ -694,6 +721,9 @@ const I18N = {
     themeLight: 'מצב בהיר', themeDark: 'מצב כהה',
     heroEyebrow: 'גלריה · אוסף עבודות', worksLabel: 'יצירות', filtersLabel: 'סינון לפי טכניקה', loading: 'מכין את הגלריה…',
     allWorks: 'כל העבודות', openFull: 'פתיחה בתצוגה מלאה',
+    heroCount: n => ` · ${n} ציורים`, heroToGallery: 'לגלריה', heroCommission: 'להזמנת ציור', waBtn: 'וואטסאפ', workPage: 'לדף הציור ולשיתוף ←', waPrefer: 'מעדיפים וואטסאפ?', waSend: 'שלחו הודעה',
+    waMsg: (t, n, url) => `שלום, ראיתי באתר של עופר ממן את הציור "${t}" (מס׳ ${n}) ואשמח לפרטים.\n${url}`,
+    waGeneral: 'שלום, הגעתי מהאתר של עופר ממן ואשמח לפרטים על הציורים.',
     viewPainting: 'הציור', viewFramed: 'במסגרת',
     aboutEyebrow: 'אודות האמן', factWorks: 'יצירות בגלריה', factYears: 'שנות יצירה', factStudio: 'סטודיו', factContact: 'יצירת קשר',
     rights: 'כל הזכויות שמורות',
@@ -720,6 +750,9 @@ const I18N = {
     themeLight: 'Light mode', themeDark: 'Dark mode',
     heroEyebrow: 'Gallery · Selected works', worksLabel: 'Works', filtersLabel: 'Filter by technique', loading: 'Preparing the gallery…',
     allWorks: 'All works', openFull: 'open full view',
+    heroCount: n => ` · ${n} paintings`, heroToGallery: 'View the gallery', heroCommission: 'Commission a painting', waBtn: 'WhatsApp', workPage: 'Painting page & sharing →', waPrefer: 'Prefer WhatsApp?', waSend: 'Send a message',
+    waMsg: (t, n, url) => `Hello, I saw the painting "${t}" (No. ${n}) on Ofer Maman's website and would love more details.\n${url}`,
+    waGeneral: 'Hello, I found Ofer Maman\'s website and would love more details about the paintings.',
     viewPainting: 'Painting', viewFramed: 'Framed',
     aboutEyebrow: 'About the artist', factWorks: 'works in the gallery', factYears: 'years', factStudio: 'studio', factContact: 'contact',
     rights: 'All rights reserved',
@@ -805,6 +838,7 @@ const ICON = {
   down:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>',
   edit:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16v4z"/></svg>',
   trash:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>',
+  wa:'<svg class="wa-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 11.6a8.6 8.6 0 0 1-12.7 7.6L3.5 20.5l1.3-4.1a8.6 8.6 0 1 1 15.7-4.8z"/><path d="M9.1 8.3c.3 2.4 2.3 5 5.2 6.1l1.2-1.2 1.7.8-.5 1.5c-3.4.2-7.3-3.6-7.3-7l1.5-.4.8 1.6-1.2 1.2"/></svg>',
   sun:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>',
   moon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>'
 };
@@ -919,6 +953,13 @@ const COLLECTION_VERSION = 10;
 const DEFAULT_TECHNIQUE = 'שמן על קנבס';
 // Purchase inquiries are sent by e-mail to this address. Empty = the purchase section stays hidden.
 const CONTACT_EMAIL = 'ofmaman@gmail.com';
+const WHATSAPP = '972523142033';                 // inquiries on WhatsApp go to Penny, who manages Ofer's work
+const pageOf = w => w && w.builtin && w.n ? `art/${w.n}/` : '';
+const waLink = w => {
+  const T = L(), url = w && pageOf(w) ? `https://ofermaman.com/${pageOf(w)}${isEn() ? '?lang=en' : ''}` : '';
+  return `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(w ? T.waMsg(titleOf(w), w.n, url) : T.waGeneral)}`;
+};
+const sizeOf = w => w.dimensions ? (/\d$/.test(w.dimensions) ? `\u2066${w.dimensions}\u2069 ${L().cm}` : w.dimensions) : '';
 const COLLECTION = [
   // Order here = order on the site (n stays the catalogue number). The vineyard opens the gallery.
   { n: 2, file:'02-vineyard-hills.jpg', title:'כרם ובית בגבעות', en:'Vineyard and House in the Hills', w:1345, h:1809, year:'2025', dimensions:'41.5 × 29.5', cat:127 },
@@ -1000,7 +1041,7 @@ function renderAll(){
   $('#heroName').textContent = name;
   $('#heroTagline').textContent = siteText('tagline');
   $('#footerText').textContent = `© ${new Date().getFullYear()} ${name} · ${L().rights}`;
-  renderFilters(); renderGrid(); renderAbout(); renderTechList(); renderBuy();
+  renderFilters(); renderGrid(); renderHeroArt(); renderAbout(); renderTechList(); renderBuy();
   if (!$('#viewAdmin').hidden){ renderAdminList(); }
   $('#worksCount').textContent = works.length ? `(${works.length})` : '';
 }
@@ -1035,7 +1076,7 @@ function renderGrid(){
     c.html += `
     <figure class="work pre" tabindex="0" role="button" data-idx="${i}" aria-label="${esc(titleOf(w))} — ${L().openFull}">
       <div class="frame"><img src="${w.thumb || w.src}" alt="${esc(titleOf(w))}" width="${w.w || ''}" height="${w.h || ''}" loading="lazy" decoding="async"></div>
-      <figcaption><span class="t">${esc(titleOf(w))}</span><span class="m">${esc(metaLine(w))}</span></figcaption>
+      <figcaption><span class="t">${esc(titleOf(w))}</span><span class="m">${esc(metaLine(w))}${w.dimensions ? `<span class="sz"> · ${esc(sizeOf(w))}</span>` : ''}</span></figcaption>
     </figure>`;
   });
   grid.dataset.cols = n;
@@ -1067,6 +1108,24 @@ function renderAbout(){
 /* =========================================================
    Purchase inquiries — a form that opens a ready-to-send e-mail
    ========================================================= */
+const HERO_SKIP = [22, 27, 48];                  // nudes and the pencil sketch stay out of the opening mosaic
+let heroKey = '';
+function renderHeroArt(){
+  $('#heroCount').textContent = works.length ? L().heroCount(works.length) : '';
+  const list = sorted().filter(w => !HERO_SKIP.includes(w.n));
+  const key = list.map(w => w.id).join();
+  if (key === heroKey) return;                    // language switches etc. keep the same tiles
+  heroKey = key;
+  // spread neighbours apart: take every 7th painting, wrapping around
+  const order = []; for (let k = 0; k < 7; k++) for (let i = k; i < list.length; i += 7) order.push(list[i]);
+  const tiles = [...order, ...order.slice().reverse()].slice(0, 96);
+  $('#heroTiles').innerHTML = tiles.map(w => {
+    const src = w.builtin ? 'works/tiles/' + w.src.split('/').pop() : (w.thumb || w.src);
+    return `<img src="${src}" alt="" width="${w.w || ''}" height="${w.h || ''}" decoding="async">`;
+  }).join('');
+  $$('#heroTiles img').forEach((im, i) => { const show = () => setTimeout(() => im.classList.add('in'), (i % 13) * 45);
+    if (im.complete) show(); else im.addEventListener('load', show, { once: true }); });
+}
 function renderBuy(){
   $$('[data-needs-email]').forEach(el => el.hidden = !CONTACT_EMAIL);
   if (!CONTACT_EMAIL) return;
@@ -1079,6 +1138,7 @@ function renderBuy(){
   sel.value = keep;
   $('#buyError').innerHTML = `${T.sendFail}<a href="mailto:${esc(CONTACT_EMAIL)}" dir="ltr">${esc(CONTACT_EMAIL)}</a>`;
   $('#buyNote').innerHTML = T.buyNote(`<a href="mailto:${esc(CONTACT_EMAIL)}" dir="ltr">${esc(CONTACT_EMAIL)}</a>`);
+  const wa = $('#buyWa'); wa.href = waLink(null); wa.innerHTML = `${ICON.wa}<span>${T.waPrefer} <u>${T.waSend}</u></span>`;
 }
 async function sendInquiry(form){
   const T = L(), v = n => form.elements[n].value.trim();
@@ -1155,7 +1215,7 @@ const LB = {
     const views = [w.src, ...(w.framed || [])];
     if (img.complete) img.style.opacity = 1;
     // numbers kept left-to-right (as Ofer writes them: 41.5 × 29.5) inside the Hebrew line
-    const T = L(), size = w.dimensions && /\d$/.test(w.dimensions) ? `⁦${w.dimensions}⁩ ${T.cm}` : w.dimensions;
+    const T = L(), size = sizeOf(w);
     const rows = [[T.year, w.year], [T.technique, techOf(w)], [T.size, size]].filter(r => r[1]);
     $('#lbInfo').innerHTML = `
       <p class="eyebrow"><span dir="ltr">${String(this.i + 1).padStart(2, '0')} / ${String(this.list.length).padStart(2, '0')}</span></p>
@@ -1163,7 +1223,8 @@ const LB = {
       ${rows.length ? `<dl>${rows.map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join('')}</dl>` : ''}
       ${views.length > 1 ? `<div class="lb-views">${views.map((src, v) => `<button type="button" data-view="${esc(src)}" aria-pressed="${v === 0}"><img src="${esc(v ? src : (w.thumb || src))}" alt="">${v ? T.viewFramed : T.viewPainting}</button>`).join('')}</div>` : ''}
       ${w.description ? `<p class="desc">${esc(w.description)}</p>` : ''}
-      ${CONTACT_EMAIL ? `<button class="btn lb-buy" data-buy="${esc(w.id)}">${T.buyBtn}</button>` : ''}`;
+      <div class="lb-acts">${CONTACT_EMAIL ? `<button class="btn lb-buy" data-buy="${esc(w.id)}">${T.buyBtn}</button>` : ''}<a class="btn lb-wa" href="${esc(waLink(w))}" target="_blank" rel="noopener">${ICON.wa}${T.waBtn}</a></div>
+      ${pageOf(w) ? `<a class="lb-page" href="${pageOf(w)}${isEn() ? '?lang=en' : ''}">${T.workPage}</a>` : ''}`;
     $('#lbInfo').scrollTop = 0;
     // Preload neighbours for instant navigation
     [1, -1].forEach(d => { const n = this.list[(this.i + d + this.list.length) % this.list.length]; if (n) new Image().src = n.src; });
@@ -1372,7 +1433,7 @@ function applyTheme(t = readTheme()){
    ========================================================= */
 function bindEvents(){
   document.addEventListener('click', e => {
-    const g = e.target.closest('[data-go]'); if (g){ go(g.dataset.go); }
+    const g = e.target.closest('[data-go]'); if (g){ if (g.dataset.pick && $('#buyWork')) $('#buyWork').value = g.dataset.pick; go(g.dataset.go); }
   });
   addEventListener('hashchange', route);
   addEventListener('popstate', () => { if (LB.active){ LB.close(true); return; } route(); });
@@ -1530,7 +1591,10 @@ async function init(){
   renderAll();               // show name/about immediately
   route();
   if (site.collection !== COLLECTION_VERSION){ await seedCollection(); renderAll(); }
-  if (location.hash === '#buy' && CONTACT_EMAIL) go('buy');    // shareable link straight to the purchase form
+  const pick = new URLSearchParams(location.search).get('work');
+  if (pick && $('#buyWork')) $('#buyWork').value = pick;     // arriving from a painting page
+  const sec = location.hash.slice(1);
+  if (['buy', 'works', 'about'].includes(sec) && (sec !== 'buy' || CONTACT_EMAIL)) setTimeout(() => go(sec), 60);
 }
 init();
 </script>
