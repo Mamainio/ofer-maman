@@ -55,6 +55,17 @@
     <image:image><image:loc>https://ofermaman.com/works/46-hat-portrait.jpg</image:loc></image:image>
     <image:image><image:loc>https://ofermaman.com/works/47-baby-hands.jpg</image:loc></image:image>
     <image:image><image:loc>https://ofermaman.com/works/48-draped-sketch.jpg</image:loc></image:image>
+    <image:image><image:loc>https://ofermaman.com/works/49-autumn-canal.jpg</image:loc></image:image>
+    <image:image><image:loc>https://ofermaman.com/works/50-woman-white-hat.jpg</image:loc></image:image>
+    <image:image><image:loc>https://ofermaman.com/works/51-wheat-field.jpg</image:loc></image:image>
+    <image:image><image:loc>https://ofermaman.com/works/52-tree-mountains.jpg</image:loc></image:image>
+    <image:image><image:loc>https://ofermaman.com/works/53-olive-oil.jpg</image:loc></image:image>
+    <image:image><image:loc>https://ofermaman.com/works/54-fair-haired-woman.jpg</image:loc></image:image>
+    <image:image><image:loc>https://ofermaman.com/works/55-ewe-lamb-flowers.jpg</image:loc></image:image>
+    <image:image><image:loc>https://ofermaman.com/works/56-sunset-trees.jpg</image:loc></image:image>
+    <image:image><image:loc>https://ofermaman.com/works/57-teapot-pear.jpg</image:loc></image:image>
+    <image:image><image:loc>https://ofermaman.com/works/58-autumn-road.jpg</image:loc></image:image>
+    <image:image><image:loc>https://ofermaman.com/works/59-sailboats-sunset.jpg</image:loc></image:image>
   </url>
   <url>
     <loc>https://ofermaman.com/?lang=en</loc>
@@ -349,5 +360,71 @@
     <xhtml:link rel="alternate" hreflang="he" href="https://ofermaman.com/art/48/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://ofermaman.com/art/48/?lang=en"/>
     <image:image><image:loc>https://ofermaman.com/works/48-draped-sketch.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://ofermaman.com/art/49/</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://ofermaman.com/art/49/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ofermaman.com/art/49/?lang=en"/>
+    <image:image><image:loc>https://ofermaman.com/works/49-autumn-canal.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://ofermaman.com/art/50/</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://ofermaman.com/art/50/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ofermaman.com/art/50/?lang=en"/>
+    <image:image><image:loc>https://ofermaman.com/works/50-woman-white-hat.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://ofermaman.com/art/51/</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://ofermaman.com/art/51/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ofermaman.com/art/51/?lang=en"/>
+    <image:image><image:loc>https://ofermaman.com/works/51-wheat-field.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://ofermaman.com/art/52/</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://ofermaman.com/art/52/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ofermaman.com/art/52/?lang=en"/>
+    <image:image><image:loc>https://ofermaman.com/works/52-tree-mountains.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://ofermaman.com/art/53/</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://ofermaman.com/art/53/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ofermaman.com/art/53/?lang=en"/>
+    <image:image><image:loc>https://ofermaman.com/works/53-olive-oil.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://ofermaman.com/art/54/</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://ofermaman.com/art/54/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ofermaman.com/art/54/?lang=en"/>
+    <image:image><image:loc>https://ofermaman.com/works/54-fair-haired-woman.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://ofermaman.com/art/55/</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://ofermaman.com/art/55/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ofermaman.com/art/55/?lang=en"/>
+    <image:image><image:loc>https://ofermaman.com/works/55-ewe-lamb-flowers.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://ofermaman.com/art/56/</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://ofermaman.com/art/56/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ofermaman.com/art/56/?lang=en"/>
+    <image:image><image:loc>https://ofermaman.com/works/56-sunset-trees.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://ofermaman.com/art/57/</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://ofermaman.com/art/57/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ofermaman.com/art/57/?lang=en"/>
+    <image:image><image:loc>https://ofermaman.com/works/57-teapot-pear.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://ofermaman.com/art/58/</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://ofermaman.com/art/58/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ofermaman.com/art/58/?lang=en"/>
+    <image:image><image:loc>https://ofermaman.com/works/58-autumn-road.jpg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://ofermaman.com/art/59/</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://ofermaman.com/art/59/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://ofermaman.com/art/59/?lang=en"/>
+    <image:image><image:loc>https://ofermaman.com/works/59-sailboats-sunset.jpg</image:loc></image:image>
   </url>
 </urlset>

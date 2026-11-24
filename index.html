@@ -818,7 +818,7 @@ const CONTENT_EN = {
   tagline: 'Realism · Oil paintings on canvas',
   about: "Ofer's realist oil paintings are born of deep sensitivity and an inner need to heal the soul. The gift for painting has been with him since childhood – he has been painting since the age of 13 – but only in recent years, in the wake of October 7th, did the canvas become a refuge and a tool for healing and contemplation.\n\nFor three years now he has been painting without pause, translating moments, feelings and reality into precise details in oil on canvas – details that seek to stop time and offer a moment of depth and quiet.\n\nHe paints in the home studio he built for himself. A modest, shy man with an artist's soul, who prefers to let the paintings speak for him."
 };
-const TECH_EN = { 'שמן על קנבס': 'Oil on canvas', 'שמן על בד': 'Oil on canvas', 'רישום בעיפרון': 'Pencil drawing' };
+const TECH_EN = { 'שמן על קנבס': 'Oil on canvas', 'שמן על בד': 'Oil on canvas', 'רישום בעיפרון': 'Pencil drawing', 'רישום בעפרונות צבעוניים': 'Colored pencil drawing' };
 let lang = 'he', booted = false;
 const L = () => I18N[lang];
 const isEn = () => lang === 'en';
@@ -988,7 +988,7 @@ async function processSource(dataUrl){
    The collection — photos live in works/ (full size) and works/thumbs/
    To add/rename built-in works: edit this list and bump COLLECTION_VERSION.
    ========================================================= */
-const COLLECTION_VERSION = 10;
+const COLLECTION_VERSION = 11;
 const DEFAULT_TECHNIQUE = 'שמן על קנבס';
 // Purchase inquiries are sent by e-mail to this address. Empty = the purchase section stays hidden.
 const CONTACT_EMAIL = 'ofmaman@gmail.com';
@@ -1051,7 +1051,18 @@ const COLLECTION = [
   { n:45, file:'45-blue-sails.jpg', title:'קומפוזיציה כחולה עם מפרשים', en:'Blue Composition with Sails', w:828, h:804, dimensions:'41.5 × 29.5' },
   { n:46, file:'46-hat-portrait.jpg', title:'דיוקן בכובע', en:'Portrait in a Hat', w:806, h:1400, dimensions:'41.5 × 29.5' },
   { n:47, file:'47-baby-hands.jpg', title:'תינוק בכפות ידיים', en:'Baby in Cupped Hands', w:1400, h:956, dimensions:'41.5 × 29.5' },
-  { n:48, file:'48-draped-sketch.jpg', title:'אישה עטופה — רישום', en:'Draped Woman — Sketch', w:1040, h:1400, technique:'רישום בעיפרון' }
+  { n:48, file:'48-draped-sketch.jpg', title:'אישה עטופה — רישום', en:'Draped Woman — Sketch', w:1040, h:1400, technique:'רישום בעיפרון' },
+  { n:49, file:'49-autumn-canal.jpg', title:'עיירה ותעלה בסתיו', en:'Autumn Town by the Canal', w:1122, h:1439, dimensions:'41.5 × 29.5' },
+  { n:50, file:'50-woman-white-hat.jpg', title:'אישה בכובע לבן על הספסל', en:'Woman in a White Hat on a Bench', w:1469, h:983, dimensions:'41.5 × 29.5' },
+  { n:51, file:'51-wheat-field.jpg', title:'שדה חיטה ועצים', en:'Wheat Field and Trees', w:1444, h:1008, dimensions:'41.5 × 29.5' },
+  { n:52, file:'52-tree-mountains.jpg', title:'עץ מול ההרים', en:'Tree before the Mountains', w:1176, h:1673, dimensions:'41.5 × 29.5' },
+  { n:53, file:'53-olive-oil.jpg', title:'טבע דומם עם שמן זית', en:'Still Life with Olive Oil', w:1275, h:1436, dimensions:'41.5 × 29.5' },
+  { n:54, file:'54-fair-haired-woman.jpg', title:'דיוקן אישה בשיער בהיר', en:'Portrait of a Fair-Haired Woman', w:1482, h:1700, dimensions:'41.5 × 29.5' },
+  { n:55, file:'55-ewe-lamb-flowers.jpg', title:'כבשה וטלה בשדה פרחים', en:'Ewe and Lamb in a Flower Field', w:1471, h:996, dimensions:'41.5 × 29.5' },
+  { n:56, file:'56-sunset-trees.jpg', title:'שקיעה וחמישה עצים', en:'Sunset with Five Trees', w:1826, h:1170, dimensions:'41.5 × 29.5' },
+  { n:57, file:'57-teapot-pear.jpg', title:'קומקום ואגס', en:'Teapot and Pear', w:1140, h:1488, technique:'רישום בעפרונות צבעוניים' },
+  { n:58, file:'58-autumn-road.jpg', title:'דרך כפרית בסתיו', en:'Country Road in Autumn', w:1144, h:1471, dimensions:'41.5 × 29.5' },
+  { n:59, file:'59-sailboats-sunset.jpg', title:'סירות מפרש בשקיעה', en:'Sailboats at Sunset', w:1791, h:1210, dimensions:'41.5 × 29.5' }
 ];
 
 async function seedCollection(){
