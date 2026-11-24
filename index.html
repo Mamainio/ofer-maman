@@ -870,11 +870,8 @@ function renderAbout(){
   $('#aboutPortrait').innerHTML = site.portrait
     ? `<img src="${site.portrait}" alt="${esc(siteText('artistName'))}">`
     : `<span class="monogram">${esc((site.artistName || '·').trim().charAt(0))}</span>`;
-  const years = works.map(w => parseInt(w.year, 10)).filter(n => !isNaN(n));
   const facts = [];
   if (works.length) facts.push(`<div class="fact"><b>${works.length}</b><span>${L().factWorks}</span></div>`);
-  if (years.length) { const a = Math.min(...years), b = Math.max(...years);
-    facts.push(`<div class="fact"><b>${a === b ? a : `${a}–${b}`}</b><span>${L().factYears}</span></div>`); }
   if (site.location) facts.push(`<div class="fact"><b>${esc(site.location)}</b><span>${L().factStudio}</span></div>`);
   if (site.email) facts.push(`<div class="fact"><b style="font-size:1.1rem;padding-top:.45rem"><a href="mailto:${esc(site.email)}" dir="ltr">${esc(site.email)}</a></b><span>${L().factContact}</span></div>`);
   $('#aboutFacts').innerHTML = facts.join('');
