@@ -3,18 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>עופר ממן — ריאליזם · ציורי שמן על קנבס</title>
-<meta name="description" content="עופר ממן, צייר — ציורי שמן ריאליסטיים על קנבס: נופים, דיוקנאות, בעלי חיים וטבע דומם. אפשר להוסיף מסגרת עץ בעבודת יד.">
+<title>עופר ממן · Ofer Maman — ריאליזם · ציורי שמן על קנבס</title>
+<meta name="description" content="עופר ממן (Ofer Maman), צייר — ציורי שמן ריאליסטיים על קנבס: נופים, דיוקנאות, בעלי חיים וטבע דומם. אפשר להוסיף מסגרת עץ בעבודת יד.">
 <meta name="robots" content="max-image-preview:large">
 <meta name="author" content="עופר ממן">
 <link rel="alternate" hreflang="he" href="https://ofermaman.com/">
 <link rel="alternate" hreflang="en" href="https://ofermaman.com/?lang=en">
 <link rel="alternate" hreflang="x-default" href="https://ofermaman.com/">
 <meta property="og:type" content="website">
-<meta property="og:title" content="עופר ממן — ציורי שמן על קנבס">
+<meta property="og:title" content="עופר ממן · Ofer Maman — ציורי שמן על קנבס">
 <meta property="og:site_name" content="עופר ממן">
 <meta property="og:description" content="ציורי שמן ריאליסטיים">
 <meta property="og:locale" content="he_IL">
+<meta property="og:locale:alternate" content="en_US">
 <meta property="og:url" content="https://ofermaman.com/">
 <meta property="og:image" content="https://ofermaman.com/works/thumbs/02-vineyard-hills.jpg">
 <meta property="og:image:alt" content="כרם ובית בגבעות — ציור שמן של עופר ממן">
@@ -752,6 +753,18 @@ function detectLang(){
   try { const s = localStorage.getItem('gallery-lang'); if (s === 'en' || s === 'he') return s; } catch {}
   return 'he';
 }
+const META_EN = {
+  description: 'Ofer Maman, painter — realist oil paintings on canvas: landscapes, portraits, animals and still life. A hand-made wooden frame can be added.',
+  'og:title': 'Ofer Maman — Oil paintings on canvas', 'og:description': 'Realist oil paintings by Ofer Maman', 'og:locale': 'en_US',
+  'og:url': 'https://ofermaman.com/?lang=en', 'og:image:alt': 'Vineyard and House in the Hills — oil painting by Ofer Maman'
+};
+let META_HE = null;
+function setMetaTexts(){
+  const tags = Object.keys(META_EN).map(k => [k, document.querySelector(`meta[name="${k}"],meta[property="${k}"]`)]).filter(([, el]) => el);
+  META_HE ??= Object.fromEntries(tags.map(([k, el]) => [k, el.content]));          // the Hebrew texts written in the page
+  tags.forEach(([k, el]) => { el.content = (isEn() ? META_EN : META_HE)[k]; });
+  const alt = document.querySelector('meta[property="og:locale:alternate"]'); if (alt) alt.content = isEn() ? 'he_IL' : 'en_US';
+}
 function setLang(l, updateUrl = true){
   lang = l === 'en' ? 'en' : 'he';
   const T = L(), root = document.documentElement;
@@ -762,6 +775,7 @@ function setLang(l, updateUrl = true){
     if (isEn()) u.searchParams.set('lang', 'en'); else u.searchParams.delete('lang');
     history.replaceState(history.state, '', u);
   }
+  setMetaTexts();
   $$('[data-i18n]').forEach(el => { el.textContent = T[el.dataset.i18n]; });
   $$('[data-i18n-attr]').forEach(el => el.dataset.i18nAttr.split(';').forEach(pair => {
     const [attr, key] = pair.split(':'); el.setAttribute(attr, T[key]);
@@ -972,7 +986,8 @@ async function seedCollection(){
    ========================================================= */
 function renderAll(){
   const name = siteText('artistName');
-  document.title = name ? `${name} — ${siteText('tagline') || L().gallery}` : L().gallery;
+  const both = !isEn() && name === DEFAULTS.artistName && CONTENT_EN.artistName ? `${name} · ${CONTENT_EN.artistName}` : name;
+  document.title = name ? `${both} — ${siteText('tagline') || L().gallery}` : L().gallery;
   $('#brand').textContent = name || L().gallery;
   $('#heroName').textContent = name;
   $('#heroTagline').textContent = siteText('tagline');
