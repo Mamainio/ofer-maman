@@ -2,7 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-EXEDi2VFlXjiBCpgTfBytFMPOviDI8k5/XgOqgRLc6E=' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://formsubmit.co https://cloudflareinsights.com https://script.google.com https://script.googleusercontent.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-nqZNJX2Y1l6OyqkoEfqyUmLZ0mi7sxAPL5xegX9TlU8=' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://formsubmit.co https://cloudflareinsights.com https://script.google.com https://script.googleusercontent.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>עופר ממן · Ofer Maman — ריאליזם · ציורי שמן על קנבס</title>
 <meta name="description" content="עופר ממן (Ofer Maman), צייר — ציורי שמן ריאליסטיים על קנבס: נופים, דיוקנאות, בעלי חיים וטבע דומם. אפשר להוסיף מסגרת עץ בעבודת יד.">
@@ -1002,7 +1002,7 @@ async function processSource(dataUrl){
    The collection — photos live in works/ (full size) and works/thumbs/
    To add/rename built-in works: edit this list and bump COLLECTION_VERSION.
    ========================================================= */
-const COLLECTION_VERSION = 12;
+const COLLECTION_VERSION = 13;
 const DEFAULT_TECHNIQUE = 'שמן על קנבס';
 // Purchase inquiries are sent by e-mail to this address. Empty = the purchase section stays hidden.
 const CONTACT_EMAIL = 'contact@ofermaman.com';          // shown on the site (Cloudflare Email Routing → forwards to the family)
@@ -1020,64 +1020,64 @@ const sizeOf = w => w.dimensions ? (/\d$/.test(w.dimensions) ? `\u2066${w.dimens
 const COLLECTION = [
   // Order here = order on the site (n stays the catalogue number). The vineyard opens the gallery.
   { n: 2, file:'02-vineyard-hills.jpg', title:'כרם ובית בגבעות', en:'Vineyard and House in the Hills', w:1345, h:1809, year:'2025', dimensions:'41.5 × 29.5', cat:127, subject:'land' },
-  { n:36, file:'36-lion-lioness.jpg', title:'אריה ולביאה', en:'Lion and Lioness', w:968, h:1344, dimensions:'41.5 × 29.5', subject:'animals' },
-  { n: 3, file:'03-three-sheep.jpg', title:'שלוש כבשים', en:'Three Sheep', w:786, h:977, dimensions:'41.5 × 29.5', subject:'animals' },
+  { n:36, file:'36-lion-lioness.jpg', title:'אריה ולביאה', en:'Lion and Lioness', w:968, h:1344, dimensions:'41.5 × 29.5', subject:'animals', year:'2025' },
+  { n: 3, file:'03-three-sheep.jpg', title:'שלוש כבשים', en:'Three Sheep', w:786, h:977, dimensions:'41.5 × 29.5', subject:'animals', year:'2023' },
   { n: 4, file:'04-dancer.jpg', title:'רקדנית', en:'Dancer', w:921, h:1322, year:'2025', dimensions:'41.5 × 29.5', cat:136, subject:'people' },
   { n: 5, file:'05-clementine.jpg', title:'קלמנטינה קלופה', en:'Peeled Clementine', w:985, h:1430, year:'2026', dimensions:'41.5 × 29.5', cat:132, subject:'still' },
-  { n: 6, file:'06-poppies.jpg', title:'פרגים ופרחי בר', en:'Poppies and Wildflowers', w:1890, h:2400, dimensions:'41.5 × 29.5', subject:'flowers' },
+  { n: 6, file:'06-poppies.jpg', title:'פרגים ופרחי בר', en:'Poppies and Wildflowers', w:1890, h:2400, dimensions:'41.5 × 29.5', subject:'flowers', year:'2024' },
   { n: 1, file:'01-green-headscarf.jpg', title:'אישה במטפחת ירוקה', en:'Woman in a Green Headscarf', w:1253, h:1853, year:'2026', dimensions:'41.5 × 29.5', cat:105, subject:'people' },
   { n: 7, file:'07-bench.jpg', title:'סבא ונכדה על הספסל', en:'Grandfather and Granddaughter on a Bench', w:1288, h:1726, year:'2026', dimensions:'41.5 × 29.5', cat:131, subject:'people' },
-  { n: 8, file:'08-path-to-sea.jpg', title:'שביל אל הים', en:'Path to the Sea', w:730, h:1063, dimensions:'41.5 × 29.5', subject:'land' },
+  { n: 8, file:'08-path-to-sea.jpg', title:'שביל אל הים', en:'Path to the Sea', w:730, h:1063, dimensions:'41.5 × 29.5', subject:'land', year:'2025' },
   { n: 9, file:'09-coffee-croissant.jpg', title:'קפה וקרואסון', en:'Coffee and Croissant', w:762, h:1118, year:'2026', dimensions:'41.5 × 29.5', cat:109, subject:'still' },
-  { n:10, file:'10-window.jpg', title:'אישה ליד החלון', en:'Woman by the Window', w:1719, h:2400, dimensions:'41.5 × 29.5', subject:'people' },
-  { n:11, file:'11-red-roses.jpg', title:'ורדים אדומים', en:'Red Roses', w:1120, h:1663, dimensions:'41.5 × 29.5', subject:'flowers' },
-  { n:12, file:'12-field-two-trees.jpg', title:'שדה ושני עצים', en:'Field with Two Trees', w:1937, h:2024, dimensions:'41.5 × 29.5', subject:'land' },
-  { n:13, file:'13-ewe-and-lamb.jpg', title:'כבשה וטלה', en:'Ewe and Lamb', w:894, h:1145, dimensions:'41.5 × 29.5', subject:'animals' },
+  { n:10, file:'10-window.jpg', title:'אישה ליד החלון', en:'Woman by the Window', w:1719, h:2400, dimensions:'41.5 × 29.5', subject:'people', year:'2026' },
+  { n:11, file:'11-red-roses.jpg', title:'ורדים אדומים', en:'Red Roses', w:1120, h:1663, dimensions:'41.5 × 29.5', subject:'flowers', year:'2023' },
+  { n:12, file:'12-field-two-trees.jpg', title:'שדה ושני עצים', en:'Field with Two Trees', w:1937, h:2024, dimensions:'41.5 × 29.5', subject:'land', year:'2024' },
+  { n:13, file:'13-ewe-and-lamb.jpg', title:'כבשה וטלה', en:'Ewe and Lamb', w:894, h:1145, dimensions:'41.5 × 29.5', subject:'animals', year:'2023' },
   { n:14, file:'14-lemon-glass.jpg', title:'כוס מים ולימון', en:'Glass of Water with Lemon', w:1751, h:2400, year:'2026', dimensions:'41.5 × 29.5', cat:129, subject:'still' },
-  { n:15, file:'15-flower-basket.jpg', title:'סל הפרחים', en:'The Flower Basket', w:1261, h:1582, dimensions:'41.5 × 29.5', subject:'people' },
-  { n:16, file:'16-calla-lilies.jpg', title:'קאלות לבנות', en:'White Calla Lilies', w:621, h:962, dimensions:'41.5 × 29.5', subject:'flowers' },
-  { n:17, file:'17-seaside-alley.jpg', title:'סמטה מול הים', en:'Alley by the Sea', w:1691, h:2400, dimensions:'41.5 × 29.5', subject:'land' },
+  { n:15, file:'15-flower-basket.jpg', title:'סל הפרחים', en:'The Flower Basket', w:1261, h:1582, dimensions:'41.5 × 29.5', subject:'people', year:'2024' },
+  { n:16, file:'16-calla-lilies.jpg', title:'קאלות לבנות', en:'White Calla Lilies', w:621, h:962, dimensions:'41.5 × 29.5', subject:'flowers', year:'2024' },
+  { n:17, file:'17-seaside-alley.jpg', title:'סמטה מול הים', en:'Alley by the Sea', w:1691, h:2400, dimensions:'41.5 × 29.5', subject:'land', year:'2024' },
   { n:18, file:'18-woman-at-tap.jpg', title:'אישה ליד הברז', en:'Woman at the Tap', w:1195, h:1697, year:'2026', dimensions:'41.5 × 29.5', cat:124, subject:'people' },
-  { n:19, file:'19-vegetables.jpg', title:'טבע דומם עם ירקות', en:'Still Life with Vegetables', w:2400, h:1800, dimensions:'41.5 × 29.5', subject:'still' },
+  { n:19, file:'19-vegetables.jpg', title:'טבע דומם עם ירקות', en:'Still Life with Vegetables', w:2400, h:1800, dimensions:'41.5 × 29.5', subject:'still', year:'2023' },
   { n:20, file:'20-yellow-hill.jpg', title:'גבעה צהובה', en:'Yellow Hill', w:1331, h:1861, year:'2026', dimensions:'41.5 × 29.5', cat:112, subject:'land' },
-  { n:21, file:'21-french-bulldog.jpg', title:'סוֹל', en:'Sol', w:688, h:971, dimensions:'41.5 × 29.5', subject:'animals' },
+  { n:21, file:'21-french-bulldog.jpg', title:'סוֹל', en:'Sol', w:688, h:971, dimensions:'41.5 × 29.5', subject:'animals', year:'2024' },
   { n:22, file:'22-nude-back.jpg', title:'עירום מהגב', en:'Nude from Behind', w:1773, h:2400, year:'2025', dimensions:'41.5 × 29.5', cat:134, subject:'people' },
   { n:23, file:'23-pink-roses.jpg', title:'ורדים ורודים', en:'Pink Roses', w:1165, h:1105, year:'2025', dimensions:'41.5 × 29.5', cat:101, subject:'flowers' },
-  { n:24, file:'24-cliffs-river.jpg', title:'צוקים מעל הנהר', en:'Cliffs above the River', w:1064, h:1658, dimensions:'41.5 × 29.5', subject:'land' },
-  { n:25, file:'25-eagle.jpg', title:'עיט בקן', en:'Eagle on Its Nest', w:1328, h:1642, dimensions:'41.5 × 29.5', subject:'animals' },
+  { n:24, file:'24-cliffs-river.jpg', title:'צוקים מעל הנהר', en:'Cliffs above the River', w:1064, h:1658, dimensions:'41.5 × 29.5', subject:'land', year:'2024' },
+  { n:25, file:'25-eagle.jpg', title:'עיט בקן', en:'Eagle on Its Nest', w:1328, h:1642, dimensions:'41.5 × 29.5', subject:'animals', year:'2023' },
   { n:26, file:'26-stone-house.jpg', title:'בית אבן בין העצים', en:'Stone House among the Trees', w:1197, h:1730, year:'2026', dimensions:'41.5 × 29.5', cat:113, subject:'land' },
-  { n:27, file:'27-woman-swimsuit.jpg', title:'אישה בבגד ים', en:'Woman in a Swimsuit', w:1672, h:2400, dimensions:'41.5 × 29.5', subject:'people' },
-  { n:28, file:'28-leaves-ferns.jpg', title:'עלים ושרכים', en:'Leaves and Ferns', w:1156, h:1678, dimensions:'41.5 × 29.5', subject:'flowers' },
-  { n:29, file:'29-paris-cafe.jpg', title:'בית קפה ואופניים', en:'Café and Bicycle', w:1057, h:1418, dimensions:'41.5 × 29.5', subject:'land' },
-  { n:30, file:'30-dirt-road.jpg', title:'דרך עפר בין השדות', en:'Dirt Road between the Fields', w:1026, h:1403, dimensions:'41.5 × 29.5', subject:'land' },
-  { n:31, file:'31-lavender.jpg', title:'שדה לבנדר', en:'Lavender Field', w:930, h:1329, dimensions:'41.5 × 29.5', subject:'land' },
+  { n:27, file:'27-woman-swimsuit.jpg', title:'אישה בבגד ים', en:'Woman in a Swimsuit', w:1672, h:2400, dimensions:'41.5 × 29.5', subject:'people', year:'2025' },
+  { n:28, file:'28-leaves-ferns.jpg', title:'עלים ושרכים', en:'Leaves and Ferns', w:1156, h:1678, dimensions:'41.5 × 29.5', subject:'flowers', year:'2026' },
+  { n:29, file:'29-paris-cafe.jpg', title:'בית קפה ואופניים', en:'Café and Bicycle', w:1057, h:1418, dimensions:'41.5 × 29.5', subject:'land', year:'2025' },
+  { n:30, file:'30-dirt-road.jpg', title:'דרך עפר בין השדות', en:'Dirt Road between the Fields', w:1026, h:1403, dimensions:'41.5 × 29.5', subject:'land', year:'2025' },
+  { n:31, file:'31-lavender.jpg', title:'שדה לבנדר', en:'Lavender Field', w:930, h:1329, dimensions:'41.5 × 29.5', subject:'land', year:'2025' },
   { n:32, file:'32-horses.jpg', title:'סוסים במרעה', en:'Horses in the Pasture', w:1113, h:1617, year:'2026', dimensions:'41.5 × 29.5', cat:135, subject:'animals' },
-  { n:33, file:'33-dry-stream.jpg', title:'ערוץ נחל', en:'Streambed', w:1013, h:1456, dimensions:'41.5 × 29.5', subject:'land' },
-  { n:34, file:'34-sweeping-woman.jpg', title:'אישה מטאטאת באור', en:'Woman Sweeping in the Light', w:1138, h:1677, dimensions:'41.5 × 29.5', subject:'people' },
-  { n:35, file:'35-waves-beach.jpg', title:'גלים על החוף', en:'Waves on the Shore', w:988, h:1471, dimensions:'41.5 × 29.5', subject:'land' },
-  { n:37, file:'37-bull.jpg', title:'שור', en:'The Bull', w:1344, h:1080, dimensions:'41.5 × 29.5', subject:'animals' },
-  { n:38, file:'38-umbrella-dog.jpg', title:'האיש עם המטרייה והכלב', en:'Man with an Umbrella and a Dog', w:968, h:1204, dimensions:'41.5 × 29.5', subject:'people' },
-  { n:39, file:'39-woman-oven.jpg', title:'אישה מול התנור', en:'Woman at the Oven', w:956, h:756, dimensions:'41.5 × 29.5', subject:'people' },
+  { n:33, file:'33-dry-stream.jpg', title:'ערוץ נחל', en:'Streambed', w:1013, h:1456, dimensions:'41.5 × 29.5', subject:'land', year:'2024' },
+  { n:34, file:'34-sweeping-woman.jpg', title:'אישה מטאטאת באור', en:'Woman Sweeping in the Light', w:1138, h:1677, dimensions:'41.5 × 29.5', subject:'people', year:'2025' },
+  { n:35, file:'35-waves-beach.jpg', title:'גלים על החוף', en:'Waves on the Shore', w:988, h:1471, dimensions:'41.5 × 29.5', subject:'land', year:'2026' },
+  { n:37, file:'37-bull.jpg', title:'שור', en:'The Bull', w:1344, h:1080, dimensions:'41.5 × 29.5', subject:'animals', year:'2025' },
+  { n:38, file:'38-umbrella-dog.jpg', title:'האיש עם המטרייה והכלב', en:'Man with an Umbrella and a Dog', w:968, h:1204, dimensions:'41.5 × 29.5', subject:'people', year:'2025' },
+  { n:39, file:'39-woman-oven.jpg', title:'אישה מול התנור', en:'Woman at the Oven', w:956, h:756, dimensions:'41.5 × 29.5', subject:'people', year:'2025' },
   { n:40, file:'40-winter-path.jpg', title:'שביל ועצים בחורף', en:'Path and Trees in Winter', w:708, h:992, year:'2025', dimensions:'41.5 × 29.5', cat:117, subject:'land' },
   { n:41, file:'41-looking-up.jpg', title:'מבט אל על', en:'Looking Up', w:656, h:1000, year:'2025', dimensions:'41.5 × 29.5', cat:122, subject:'people' },
   { n:42, file:'42-black-horse.jpg', title:'סוס שחור', en:'Black Horse', w:1336, h:984, year:'2025', dimensions:'41.5 × 29.5', cat:103, subject:'animals' },
   { n:43, file:'43-bottle-sand.jpg', title:'בקבוק בחול', en:'Bottle in the Sand', w:960, h:664, year:'2026', dimensions:'41.5 × 29.5', cat:125, subject:'still' },
-  { n:44, file:'44-two-figures.jpg', title:'שתי דמויות לבנות', en:'Two White Figures', w:428, h:1056, dimensions:'41.5 × 29.5', subject:'people' },
-  { n:45, file:'45-blue-sails.jpg', title:'קומפוזיציה כחולה עם מפרשים', en:'Blue Composition with Sails', w:828, h:804, dimensions:'41.5 × 29.5', subject:'land' },
-  { n:46, file:'46-hat-portrait.jpg', title:'דיוקן בכובע', en:'Portrait in a Hat', w:806, h:1400, dimensions:'41.5 × 29.5', subject:'people' },
-  { n:47, file:'47-baby-hands.jpg', title:'תינוק בכפות ידיים', en:'Baby in Cupped Hands', w:1400, h:956, dimensions:'41.5 × 29.5', subject:'people' },
-  { n:48, file:'48-draped-sketch.jpg', title:'אישה עטופה — רישום', en:'Draped Woman — Sketch', w:1040, h:1400, technique:'רישום בעיפרון', subject:'people' },
-  { n:49, file:'49-autumn-canal.jpg', title:'עיירה ותעלה בסתיו', en:'Autumn Town by the Canal', w:1122, h:1439, dimensions:'41.5 × 29.5', subject:'land' },
-  { n:50, file:'50-woman-white-hat.jpg', title:'אישה בכובע לבן על הספסל', en:'Woman in a White Hat on a Bench', w:1469, h:983, dimensions:'41.5 × 29.5', subject:'people' },
-  { n:51, file:'51-wheat-field.jpg', title:'שדה חיטה ועצים', en:'Wheat Field and Trees', w:1444, h:1008, dimensions:'41.5 × 29.5', subject:'land' },
-  { n:52, file:'52-tree-mountains.jpg', title:'עץ מול ההרים', en:'Tree before the Mountains', w:1176, h:1673, dimensions:'41.5 × 29.5', subject:'land' },
-  { n:53, file:'53-olive-oil.jpg', title:'טבע דומם עם שמן זית', en:'Still Life with Olive Oil', w:1275, h:1436, dimensions:'41.5 × 29.5', subject:'still' },
-  { n:54, file:'54-fair-haired-woman.jpg', title:'דיוקן אישה בשיער בהיר', en:'Portrait of a Fair-Haired Woman', w:1482, h:1700, dimensions:'41.5 × 29.5', subject:'people' },
-  { n:55, file:'55-ewe-lamb-flowers.jpg', title:'כבשה וטלה בשדה פרחים', en:'Ewe and Lamb in a Flower Field', w:1471, h:996, dimensions:'41.5 × 29.5', subject:'animals' },
-  { n:56, file:'56-sunset-trees.jpg', title:'שקיעה וחמישה עצים', en:'Sunset with Five Trees', w:1826, h:1170, dimensions:'41.5 × 29.5', subject:'land' },
-  { n:57, file:'57-teapot-pear.jpg', title:'קומקום ואגס', en:'Teapot and Pear', w:1140, h:1488, technique:'רישום בעפרונות צבעוניים', subject:'still' },
-  { n:58, file:'58-autumn-road.jpg', title:'דרך כפרית בסתיו', en:'Country Road in Autumn', w:1144, h:1471, dimensions:'41.5 × 29.5', subject:'land' },
-  { n:59, file:'59-sailboats-sunset.jpg', title:'סירות מפרש בשקיעה', en:'Sailboats at Sunset', w:1791, h:1210, dimensions:'41.5 × 29.5', subject:'land' }
+  { n:44, file:'44-two-figures.jpg', title:'שתי דמויות לבנות', en:'Two White Figures', w:428, h:1056, dimensions:'41.5 × 29.5', subject:'people', year:'2024' },
+  { n:45, file:'45-blue-sails.jpg', title:'קומפוזיציה כחולה עם מפרשים', en:'Blue Composition with Sails', w:828, h:804, dimensions:'41.5 × 29.5', subject:'land', year:'2024' },
+  { n:46, file:'46-hat-portrait.jpg', title:'דיוקן בכובע', en:'Portrait in a Hat', w:806, h:1400, dimensions:'41.5 × 29.5', subject:'people', year:'2025' },
+  { n:47, file:'47-baby-hands.jpg', title:'תינוק בכפות ידיים', en:'Baby in Cupped Hands', w:1400, h:956, dimensions:'41.5 × 29.5', subject:'people', year:'2026' },
+  { n:48, file:'48-draped-sketch.jpg', title:'אישה עטופה — רישום', en:'Draped Woman — Sketch', w:1040, h:1400, technique:'רישום בעיפרון', subject:'people', year:'2023' },
+  { n:49, file:'49-autumn-canal.jpg', title:'עיירה ותעלה בסתיו', en:'Autumn Town by the Canal', w:1122, h:1439, dimensions:'41.5 × 29.5', subject:'land', year:'2026' },
+  { n:50, file:'50-woman-white-hat.jpg', title:'אישה בכובע לבן על הספסל', en:'Woman in a White Hat on a Bench', w:1469, h:983, dimensions:'41.5 × 29.5', subject:'people', year:'2026' },
+  { n:51, file:'51-wheat-field.jpg', title:'שדה חיטה ועצים', en:'Wheat Field and Trees', w:1444, h:1008, dimensions:'41.5 × 29.5', subject:'land', year:'2026' },
+  { n:52, file:'52-tree-mountains.jpg', title:'עץ מול ההרים', en:'Tree before the Mountains', w:1176, h:1673, dimensions:'41.5 × 29.5', subject:'land', year:'2025' },
+  { n:53, file:'53-olive-oil.jpg', title:'טבע דומם עם שמן זית', en:'Still Life with Olive Oil', w:1275, h:1436, dimensions:'41.5 × 29.5', subject:'still', year:'2026' },
+  { n:54, file:'54-fair-haired-woman.jpg', title:'דיוקן אישה בשיער בהיר', en:'Portrait of a Fair-Haired Woman', w:1482, h:1700, dimensions:'41.5 × 29.5', subject:'people', year:'2026' },
+  { n:55, file:'55-ewe-lamb-flowers.jpg', title:'כבשה וטלה בשדה פרחים', en:'Ewe and Lamb in a Flower Field', w:1471, h:996, dimensions:'41.5 × 29.5', subject:'animals', year:'2026' },
+  { n:56, file:'56-sunset-trees.jpg', title:'שקיעה וחמישה עצים', en:'Sunset with Five Trees', w:1826, h:1170, dimensions:'41.5 × 29.5', subject:'land', year:'2026' },
+  { n:57, file:'57-teapot-pear.jpg', title:'קומקום ואגס', en:'Teapot and Pear', w:1140, h:1488, technique:'רישום בעפרונות צבעוניים', subject:'still', year:'2024' },
+  { n:58, file:'58-autumn-road.jpg', title:'דרך כפרית בסתיו', en:'Country Road in Autumn', w:1144, h:1471, dimensions:'41.5 × 29.5', subject:'land', year:'2026' },
+  { n:59, file:'59-sailboats-sunset.jpg', title:'סירות מפרש בשקיעה', en:'Sailboats at Sunset', w:1791, h:1210, dimensions:'41.5 × 29.5', subject:'land', year:'2026' }
 ];
 
 async function seedCollection(){
