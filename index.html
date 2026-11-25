@@ -2,7 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-nqZNJX2Y1l6OyqkoEfqyUmLZ0mi7sxAPL5xegX9TlU8=' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://formsubmit.co https://cloudflareinsights.com https://script.google.com https://script.googleusercontent.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-uKQLGrFhkNg+feHPb7QtxGQk/C9WiAP4BjyJ5i/1rXY=' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://formsubmit.co https://cloudflareinsights.com https://script.google.com https://script.googleusercontent.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>עופר ממן · Ofer Maman — ריאליזם · ציורי שמן על קנבס</title>
 <meta name="description" content="עופר ממן (Ofer Maman), צייר — ציורי שמן ריאליסטיים על קנבס: נופים, דיוקנאות, בעלי חיים וטבע דומם. אפשר להוסיף מסגרת עץ בעבודת יד.">
@@ -1009,7 +1009,7 @@ const CONTACT_EMAIL = 'contact@ofermaman.com';          // shown on the site (Cl
 const FORM_INBOX = 'ofmaman@gmail.com';                 // FormSubmit inbox — already activated, so the form keeps using it
 // Google Apps Script web app in Ofer's account: numbers each inquiry, logs it to a Sheet, e-mails Ofer and the customer.
 // Empty = send through FormSubmit only (no number). FormSubmit also stays as the fallback if the script is unreachable.
-const INQUIRY_URL = '';
+const INQUIRY_URL = 'https://script.google.com/macros/s/AKfycbzXgYifGnPV8FyEMXwFfnpJsdBQDCGxWVeT9WCmBXJmiHBEvLvfGyzIM7e1-egbtlr-LQ/exec';
 const WHATSAPP = '972526246915';                 // inquiries on WhatsApp go straight to Ofer
 const pageOf = w => w && w.builtin && w.n ? `art/${w.n}/` : '';
 const waLink = w => {
