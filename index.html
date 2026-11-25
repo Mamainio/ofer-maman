@@ -2,7 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-PEFSnjPneaxBnXQtYFZE4d/8Qumld+JP9YAA4Sy4qgA=' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://formsubmit.co https://cloudflareinsights.com https://script.google.com https://script.googleusercontent.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-1CefhcEp9tSScjO71Ucx6lCYjYrkGGvVmffP8ph6caY=' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://formsubmit.co https://cloudflareinsights.com https://script.google.com https://script.googleusercontent.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>עופר ממן · Ofer Maman — ריאליזם · ציורי שמן על קנבס</title>
 <meta name="description" content="עופר ממן (Ofer Maman), צייר — ציורי שמן ריאליסטיים על קנבס: נופים, דיוקנאות, בעלי חיים וטבע דומם. אפשר להוסיף מסגרת עץ בעבודת יד.">
@@ -992,7 +992,8 @@ async function processSource(dataUrl){
 const COLLECTION_VERSION = 11;
 const DEFAULT_TECHNIQUE = 'שמן על קנבס';
 // Purchase inquiries are sent by e-mail to this address. Empty = the purchase section stays hidden.
-const CONTACT_EMAIL = 'ofmaman@gmail.com';
+const CONTACT_EMAIL = 'contact@ofermaman.com';          // shown on the site (Cloudflare Email Routing → forwards to the family)
+const FORM_INBOX = 'ofmaman@gmail.com';                 // FormSubmit inbox — already activated, so the form keeps using it
 // Google Apps Script web app in Ofer's account: numbers each inquiry, logs it to a Sheet, e-mails Ofer and the customer.
 // Empty = send through FormSubmit only (no number). FormSubmit also stays as the fallback if the script is unreachable.
 const INQUIRY_URL = '';
@@ -1234,7 +1235,7 @@ async function sendInquiry(form){
       } catch (e) { console.warn('Numbered inquiry failed, falling back to FormSubmit:', e.message); }
     }
     if (!number){
-      const res = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
+      const res = await fetch(`https://formsubmit.co/ajax/${FORM_INBOX}`, {
         method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(data)
       });
       const out = await res.json().catch(() => ({}));
