@@ -427,4 +427,7 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://ofermaman.com/art/59/?lang=en"/>
     <image:image><image:loc>https://ofermaman.com/works/59-sailboats-sunset.jpg</image:loc></image:image>
   </url>
+  <url>
+    <loc>https://ofermaman.com/accessibility/</loc>
+  </url>
 </urlset>
