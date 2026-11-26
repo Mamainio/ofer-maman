@@ -2,7 +2,7 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-uKQLGrFhkNg+feHPb7QtxGQk/C9WiAP4BjyJ5i/1rXY=' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://formsubmit.co https://cloudflareinsights.com https://script.google.com https://script.googleusercontent.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-etepRqJQzwkJ3C91WREdY2aHTXf578+dN6GXgIMjpDI=' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://formsubmit.co https://cloudflareinsights.com https://script.google.com https://script.googleusercontent.com; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>עופר ממן · Ofer Maman — ריאליזם · ציורי שמן על קנבס</title>
 <meta name="description" content="עופר ממן (Ofer Maman), צייר — ציורי שמן ריאליסטיים על קנבס: נופים, דיוקנאות, בעלי חיים וטבע דומם. אפשר להוסיף מסגרת עץ בעבודת יד.">
@@ -188,8 +188,8 @@
    1. Design tokens
    ========================================================= */
 :root{
-  --bg:#f5f2ec; --surface:#fbf9f5; --ink:#1c1a17; --ink-2:#4a4640; --muted:#8a847b;
-  --line:#e2dcd2; --accent:#8b6b3d; --danger:#b4442f;
+  --bg:#e9dec9; --surface:#f3ecdf; --ink:#1c1a17; --ink-2:#4a4640; --muted:#665e52;
+  --line:#d5c6ab; --accent:#8b6b3d; --danger:#b4442f;
   --shadow:0 1px 2px rgba(30,25,20,.06),0 10px 28px rgba(30,25,20,.09);
   --lb-bg:#0e0d0c; --lb-ink:#ece8e1; --lb-muted:#9a948b; --lb-line:rgba(255,255,255,.09);
   --serif:"Frank Ruhl Libre","Times New Roman",serif;
@@ -288,6 +288,23 @@ button{cursor:pointer}
 .chip:hover{color:var(--ink)}
 .chip[aria-pressed="true"]{color:var(--ink);border-color:var(--accent)}
 .chip-n{font-size:.72rem;color:var(--muted);margin-inline-start:2px}
+.chip-back{color:var(--ink-2)}
+.chip-sep{width:1px;height:14px;background:var(--line);align-self:center}
+.rooms-eb{text-align:center;margin-bottom:clamp(28px,4vw,48px)}
+.rooms{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(26px,3.6vw,52px) clamp(22px,3.4vw,48px);max-width:1080px;margin:0 auto clamp(20px,4vw,40px)}
+.room{background:none;border:0;padding:0;color:inherit;font:inherit;text-align:center;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px}
+.room-img{display:block;width:100%;aspect-ratio:4/5;overflow:hidden;background:var(--surface);box-shadow:var(--shadow);margin-bottom:14px}
+.room-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1s cubic-bezier(.2,.7,.2,1)}
+.room-img.quad{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:var(--line)}
+.room:hover .room-img img,.room:focus-visible .room-img img{transform:scale(1.03)}
+.room:focus-visible{outline:none}.room:focus-visible .room-img{outline:2px solid var(--accent);outline-offset:4px}
+.room-t{font-family:var(--serif);font-size:1.3rem;line-height:1.3}
+.room-n{font-size:.84rem;color:var(--muted)}
+@media (max-width:719px){
+  .rooms{grid-template-columns:1fr 1fr;gap:26px 14px}
+  .room-img{margin-bottom:8px}
+  .room-t{font-size:1.02rem}.room-n{font-size:.74rem}
+}
 
 .grid{display:flex;align-items:flex-start;gap:clamp(22px,3.4vw,48px)}
 .grid .col{flex:1;min-width:0}
@@ -543,6 +560,10 @@ dialog::backdrop{background:rgba(10,9,8,.55);-webkit-backdrop-filter:blur(3px);b
 
 
   <section id="works" class="wrap" aria-label="יצירות" data-i18n-attr="aria-label:worksLabel">
+    <div class="rooms-wrap" id="roomsWrap" hidden>
+      <p class="eyebrow rooms-eb" data-i18n="roomsEyebrow">הגלריה לפי נושא</p>
+      <div class="rooms" id="rooms"></div>
+    </div>
     <div class="filters" id="filters" role="toolbar" aria-label="סינון לפי נושא" data-i18n-attr="aria-label:filtersLabel"></div>
     <div class="grid" id="grid"><div class="loading" data-i18n="loading">מכין את הגלריה…</div></div>
   </section>
@@ -763,7 +784,7 @@ const I18N = {
     heroEyebrow: 'גלריה · אוסף עבודות', worksLabel: 'יצירות', filtersLabel: 'סינון לפי נושא', loading: 'מכין את הגלריה…',
     subj: { land: 'נופים ומקומות', people: 'דמויות ודיוקנאות', animals: 'בעלי חיים', still: 'טבע דומם', flowers: 'פרחים וצמחים' },
     a11y: 'הצהרת נגישות', zoomHint: 'הקשה כפולה או צביטה להגדלה',
-    allWorks: 'כל העבודות', openFull: 'פתיחה בתצוגה מלאה',
+    allWorks: 'כל העבודות', roomsEyebrow: 'הגלריה לפי נושא', backRooms: 'כל הנושאים', nPaint: n => `${n} ציורים`, openFull: 'פתיחה בתצוגה מלאה',
     heroCount: n => ` · ${n} ציורים`, heroToGallery: 'לגלריה', heroCommission: 'להזמנת ציור', waBtn: 'וואטסאפ', workPage: 'לדף הציור ולשיתוף ←', waPrefer: 'מעדיפים וואטסאפ?', waSend: 'שלחו הודעה',
     waMsg: (t, n, url) => `שלום, ראיתי באתר של עופר ממן את הציור "${t}" (מס׳ ${n}) ואשמח לפרטים.\n${url}`,
     waGeneral: 'שלום, הגעתי מהאתר של עופר ממן ואשמח לפרטים על הציורים.',
@@ -797,7 +818,7 @@ const I18N = {
     heroEyebrow: 'Gallery · Selected works', worksLabel: 'Works', filtersLabel: 'Filter by subject', loading: 'Preparing the gallery…',
     subj: { land: 'Landscapes & places', people: 'Figures & portraits', animals: 'Animals', still: 'Still life', flowers: 'Flowers & plants' },
     a11y: 'Accessibility', zoomHint: 'Double-tap or pinch to zoom',
-    allWorks: 'All works', openFull: 'open full view',
+    allWorks: 'All works', roomsEyebrow: 'The gallery by subject', backRooms: 'All subjects', nPaint: n => `${n} paintings`, openFull: 'open full view',
     heroCount: n => ` · ${n} paintings`, heroToGallery: 'View the gallery', heroCommission: 'Commission a painting', waBtn: 'WhatsApp', workPage: 'Painting page & sharing →', waPrefer: 'Prefer WhatsApp?', waSend: 'Send a message',
     waMsg: (t, n, url) => `Hello, I saw the painting "${t}" (No. ${n}) on Ofer Maman's website and would love more details.\n${url}`,
     waGeneral: 'Hello, I found Ofer Maman\'s website and would love more details about the paintings.',
@@ -957,12 +978,14 @@ const DEFAULTS = {
 };
 let site = { ...DEFAULTS };
 let works = [];
-let filter = 'all';
+let filter = null;                 // null = the subject "rooms"; otherwise 'all' or a subject
 let pending = [];
 
 const sorted = () => [...works].sort((a, b) => b.order - a.order);
-const visible = () => sorted().filter(w => filter === 'all' || w.subject === filter);
+const visible = () => sorted().filter(w => !filter || filter === 'all' || w.subject === filter);
 const SUBJECTS = ['land', 'people', 'animals', 'still', 'flowers'];
+const ROOM_COVER = { land: 2, people: 4, animals: 36, still: 5, flowers: 6 };   // the painting on each subject's card
+const ROOM_ALL = [59, 55, 11, 46];                                               // the four on the "all works" card
 const maxOrder = () => works.reduce((m, w) => Math.max(m, w.order), 0);
 
 async function saveSite(){ await DB.put('settings', { key: 'site', value: site }); }
@@ -1110,7 +1133,7 @@ function renderAll(){
   $('#heroTagline').textContent = siteText('tagline');
   $('#footerText').textContent = `© ${new Date().getFullYear()} ${name} · ${L().rights}`;
   $$('.spot').forEach(b => { const w = works.find(x => x.n === +b.dataset.n); if (w){ b.querySelector('span').textContent = titleOf(w); b.setAttribute('aria-label', titleOf(w)); } });
-  renderFilters(); renderGrid(); renderHeroArt(); renderAbout(); renderTechList(); renderBuy();
+  renderRooms(); renderFilters(); renderGrid(); renderHeroArt(); renderAbout(); renderTechList(); renderBuy();
   if (!$('#viewAdmin').hidden){ renderAdminList(); }
   $('#worksCount').textContent = works.length ? `(${works.length})` : '';
 }
@@ -1118,12 +1141,32 @@ function renderAll(){
 function renderFilters(){
   const T = L(), el = $('#filters');
   const present = SUBJECTS.filter(k => works.some(w => w.subject === k));
-  if (present.length < 2){ el.innerHTML = ''; filter = 'all'; return; }
-  if (filter !== 'all' && !present.includes(filter)) filter = 'all';
-  el.innerHTML = ['all', ...present].map(k => {
+  if (present.length < 2){ el.innerHTML = ''; if (works.length) filter = 'all'; return; }
+  if (filter && filter !== 'all' && !present.includes(filter)) filter = 'all';
+  el.innerHTML = `<button class="chip chip-back" data-rooms>${isEn() ? '←' : '→'} ${T.backRooms}</button><span class="chip-sep" aria-hidden="true"></span>` + ['all', ...present].map(k => {
     const n = k === 'all' ? works.length : works.filter(w => w.subject === k).length;
     return `<button class="chip" data-filter="${k}" aria-pressed="${k === filter}">${k === 'all' ? T.allWorks : T.subj[k]} <span class="chip-n">${n}</span></button>`;
   }).join('');
+}
+
+function renderRooms(){
+  const T = L(), rooms = !filter;
+  $('#roomsWrap').hidden = !rooms; $('#filters').hidden = rooms; $('#grid').hidden = rooms;
+  if (!rooms) return;
+  const byN = n => works.find(w => w.n === n);
+  const card = (k, inner, n, label) =>
+    `<button class="room" type="button" data-room="${k}" aria-label="${esc(label)} — ${T.nPaint(n)}"><span class="room-img${k === 'all' ? ' quad' : ''}">${inner}</span>` +
+    `<span class="room-t">${esc(label)}</span><span class="room-n">${T.nPaint(n)}</span></button>`;
+  const img = w => w ? `<img src="${w.thumb || w.src}" alt="" loading="lazy" decoding="async">` : '';
+  const present = SUBJECTS.filter(k => works.some(w => w.subject === k));
+  $('#rooms').innerHTML = present.map(k => {
+    const list = sorted().filter(w => w.subject === k);
+    return card(k, img(byN(ROOM_COVER[k]) && byN(ROOM_COVER[k]).subject === k ? byN(ROOM_COVER[k]) : list[0]), list.length, T.subj[k]);
+  }).join('') + card('all', ROOM_ALL.map(byN).filter(Boolean).map(img).join(''), works.length, T.allWorks);
+}
+function openRoom(k, push = true){
+  if (push) history.pushState({ cat: k }, '');
+  filter = k; renderRooms(); renderFilters(); renderGrid(); go('works');
 }
 
 let revealObs;
@@ -1133,6 +1176,7 @@ function gridColumnCount(){
 }
 function renderGrid(){
   const list = visible(), grid = $('#grid');
+  if (!filter && works.length){ grid.innerHTML = ''; return; }          // the rooms are showing
   if (!works.length){
     grid.innerHTML = `<div class="empty" style="flex:1"><p>הגלריה עדיין ריקה.</p><button class="btn" data-go="admin">העלאת יצירה ראשונה</button></div>`;
     return;
@@ -1543,7 +1587,12 @@ function bindEvents(){
     const sp = e.target.closest('.spot'); if (sp){ const l = sorted(), i = l.findIndex(w => w.n === +sp.dataset.n); if (i >= 0) LB.open(l, i); }
   });
   addEventListener('hashchange', route);
-  addEventListener('popstate', () => { if (LB.active){ LB.close(true); return; } route(); });
+  addEventListener('popstate', () => {
+    if (LB.active){ LB.close(true); return; }
+    const c = history.state?.cat || null;                        // phone Back moves between the subjects and a subject
+    if (c !== filter && !$('#viewMain').hidden){ filter = c; renderRooms(); renderFilters(); renderGrid(); go('works'); return; }
+    route();
+  });
   addEventListener('scroll', () => $('#header').classList.toggle('scrolled', scrollY > 10), { passive: true });
   let rz; addEventListener('resize', () => { clearTimeout(rz); rz = setTimeout(() => {
     if (!$('#viewMain').hidden && works.length && +$('#grid').dataset.cols !== gridColumnCount()) renderGrid();
@@ -1557,7 +1606,15 @@ function bindEvents(){
   });
 
   // Filters + grid
-  $('#filters').addEventListener('click', e => { const b = e.target.closest('[data-filter]'); if (!b) return; filter = b.dataset.filter; renderFilters(); renderGrid(); });
+  $('#rooms').addEventListener('click', e => { const r = e.target.closest('[data-room]'); if (r) openRoom(r.dataset.room); });
+  $('#filters').addEventListener('click', e => {
+    if (e.target.closest('[data-rooms]')){                       // back to the subjects
+      if (history.state?.cat) history.back(); else { filter = null; renderRooms(); renderGrid(); go('works'); }
+      return;
+    }
+    const b = e.target.closest('[data-filter]'); if (!b) return;
+    filter = b.dataset.filter; history.replaceState({ cat: filter }, ''); renderFilters(); renderGrid();
+  });
   const openFrom = el => LB.open(visible(), +el.dataset.idx);
   $('#grid').addEventListener('click', e => { const w = e.target.closest('.work'); if (w) openFrom(w); });
   $('#grid').addEventListener('keydown', e => { const w = e.target.closest('.work'); if (w && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); openFrom(w); } });
